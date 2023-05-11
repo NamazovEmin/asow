@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ru.namazov.asow.dto.CargoDTO;
-import ru.namazov.asow.dto.CheckDelete;
 import ru.namazov.asow.entity.Cargo;
 import ru.namazov.asow.mapper.CargoMapper;
+import ru.namazov.asow.response.CheckDelete;
 import ru.namazov.asow.service.CargoService;
 
 import lombok.AllArgsConstructor;
