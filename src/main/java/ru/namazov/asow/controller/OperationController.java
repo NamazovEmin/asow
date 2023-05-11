@@ -2,12 +2,14 @@ package ru.namazov.asow.controller;
 
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import ru.namazov.asow.entity.Railway;
-import ru.namazov.asow.entity.Wagon;
+import ru.namazov.asow.dto.WagonDTO;
+import ru.namazov.asow.mapper.WagonMapper;
+import ru.namazov.asow.response.Successful;
 
 import lombok.AllArgsConstructor;
 
@@ -17,20 +19,22 @@ import lombok.AllArgsConstructor;
 public class OperationController {
 
     private final OperationFacade operationFacade;
+    private final WagonMapper wagonMapper;
+
 
     @PostMapping("/receive")
-    public void receiveWagon(List<Wagon> wagonList, Railway railway) {
-        operationFacade.receive(wagonList, railway);
+    public ResponseEntity<Successful> receiveWagons(List<WagonDTO> wagonDTOList, Long railway) {
+        return ResponseEntity.ok(new Successful(operationFacade.receive(wagonMapper.toEntity(wagonDTOList), railway)));
     }
 
     @PostMapping("/move")
-    public void moveWagon(List<Wagon> wagonList, Railway railway) {
-        operationFacade.move(wagonList, railway);
+    public ResponseEntity<Successful> moveWagons(List<WagonDTO> wagonDTOList, Long railway) {
+        // TODO: 12.05.2023 нужно получить переменную указывающую куда переместить вагоны, в голову или хвост
+        return ResponseEntity.ok(new Successful(operationFacade.move(wagonMapper.toEntity(wagonDTOList), railway)));
     }
 
     @PostMapping("/return")
-    public void returnWagon(List<Wagon> wagonList, Railway railway) {
-        operationFacade.bringBack(wagonList, railway);
+    public ResponseEntity<Successful> returnWagons(List<WagonDTO> wagonDTOList, Long railway) {
+        return ResponseEntity.ok(new Successful(operationFacade.bringBack(wagonMapper.toEntity(wagonDTOList), railway)));
     }
-
 }

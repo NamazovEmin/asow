@@ -12,7 +12,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -33,8 +32,16 @@ public class Operation {
     @Column(name = "type", nullable = false)
     private OperationType type;
 
-    @ManyToOne(optional = false)
-    private Railway railway;
+    @Column(name = "from_railway_id")
+    private Long fromRailwayID;
+
+    @Column(name = "where_railway_id")
+    private Long whereRailwayID;
+
+    // TODO: 11.05.2023 как сохранить не вагон id, а состояние обекта на данный момент?
+
+    @Column(name = "wagon_id")
+    private Long wagon_id;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
@@ -45,4 +52,11 @@ public class Operation {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "update_date")
     private Date updateDate;
+
+    public Operation(OperationType type, Long fromRailwayID, Long whereRailwayID, Long wagon_id) {
+        this.type = type;
+        this.fromRailwayID = fromRailwayID;
+        this.whereRailwayID = whereRailwayID;
+        this.wagon_id = wagon_id;
+    }
 }

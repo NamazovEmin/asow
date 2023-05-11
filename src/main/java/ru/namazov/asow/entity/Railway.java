@@ -35,4 +35,10 @@ public class Railway {
 
     @OneToMany(mappedBy = "railway")
     private List<Wagon> wagonList = new ArrayList<>();
+
+
+    public List<Wagon> getWagonList() {
+        return wagonList;
+    }
+
 }

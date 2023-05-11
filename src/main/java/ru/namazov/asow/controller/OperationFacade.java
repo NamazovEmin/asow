@@ -2,14 +2,13 @@ package ru.namazov.asow.controller;
 
 import java.util.List;
 
-import ru.namazov.asow.entity.Railway;
 import ru.namazov.asow.entity.Wagon;
 
 public interface OperationFacade {
 
-    void receive(List<Wagon> wagonList, Railway railway);
+    boolean receive(List<Wagon> wagonList, Long railway);
 
-    void move(List<Wagon> wagonList, Railway railway);
+    boolean move(List<Wagon> wagonList, Long railway);
 
-    void bringBack(List<Wagon> wagonList, Railway railway);
+    boolean bringBack(List<Wagon> wagonList, Long railway);
 }

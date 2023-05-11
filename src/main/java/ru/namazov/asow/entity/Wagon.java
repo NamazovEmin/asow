@@ -30,7 +30,7 @@ public class Wagon {
     @Column(name = "serial_number")
     private Long serialNumber;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name="cargos_id")
     private Cargo cargo;
 
@@ -44,4 +44,12 @@ public class Wagon {
     @ManyToOne
     @JoinColumn(name = "railways_id")
     private Railway railway;
+
+    public Long getId() {
+        return id;
+    }
+
+    public Long getSerialNumber() {
+        return serialNumber;
+    }
 }

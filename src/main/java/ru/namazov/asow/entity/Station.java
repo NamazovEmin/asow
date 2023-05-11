@@ -24,6 +24,9 @@ public class Station {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "name", nullable = false)
+    private String name;
+
     @OneToMany(mappedBy = "station")
     private List<Railway> railwaysList = new ArrayList<>();
 }

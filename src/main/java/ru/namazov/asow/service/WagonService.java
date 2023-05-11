@@ -1,5 +1,6 @@
 package ru.namazov.asow.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -29,5 +30,9 @@ public class WagonService {
 
     public void delete(Wagon wagon) {
         wagonRepository.delete(wagon);
+    }
+
+    public List<Wagon> saveAll(List<Wagon> wagonList) {
+        return wagonRepository.saveAll(wagonList);
     }
 }
