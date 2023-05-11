@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -25,4 +26,7 @@ public class Cargo {
 
     @Column(name = "name", unique = true)
     private String name;
+
+    @OneToMany
+    private Wagon wagon;
 }

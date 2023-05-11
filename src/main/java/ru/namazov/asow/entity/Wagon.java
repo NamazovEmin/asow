@@ -38,5 +38,10 @@ public class Wagon {
     private Long cargosWeight;
 
     @ManyToOne
+    @JoinColumn(name = "trains_id")
     private Train train;
+
+    @ManyToOne
+    @JoinColumn(name = "railways_id")
+    private Railway railway;
 }
