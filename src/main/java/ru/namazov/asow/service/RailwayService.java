@@ -17,8 +17,8 @@ public class RailwayService {
         return railwayRepository.save(railway);
     }
 
-    public void update(Railway railway) {
-        save(railway);
+    public Railway update(Railway railway) {
+        return save(railway);
     }
 
     public Railway findById(Long id) {

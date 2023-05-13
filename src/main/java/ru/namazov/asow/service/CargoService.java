@@ -17,7 +17,7 @@ public class CargoService {
         return cargoRepository.save(cargo);
     }
 
-    public Cargo update(Cargo cargo) {
+    public Cargo put(Cargo cargo) {
         return save(cargo);
     }
 

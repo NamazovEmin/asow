@@ -1,3 +1,5 @@
+
+
 spring:
   datasource:
     url: jdbc:h2:mem:mydb
@@ -7,4 +9,11 @@ spring:
   jpa:
     spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
     show-sql: true
+
+  springdoc.swagger-ui:
+    enabled: true
+    use-root-path: true
+server:
+  servlet:
+    context-path: /api
 

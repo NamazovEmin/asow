@@ -6,51 +6,47 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ru.namazov.asow.dto.CargoDTO;
 import ru.namazov.asow.entity.Cargo;
 import ru.namazov.asow.mapper.CargoMapper;
-import ru.namazov.asow.response.CheckDelete;
 import ru.namazov.asow.service.CargoService;
 
 import lombok.AllArgsConstructor;
 
 @RestController
-@AllArgsConstructor
 @RequestMapping(name = "/cargo")
+@AllArgsConstructor
+// TODO: 13.05.2023 программа игнорирует /cargo
 public class CargoController {
 
     private final CargoMapper cargoMapper;
     private final CargoService cargoService;
 
     @PostMapping
-    public ResponseEntity<CargoDTO> save(@RequestParam("cargoDTO") CargoDTO cargoDTO) {
+    public ResponseEntity<CargoDTO> save(@RequestBody CargoDTO cargoDTO) {
         return ResponseEntity.ok(cargoMapper.toDTO(cargoService.save(cargoMapper.toEntity(cargoDTO))));
     }
 
     @PutMapping
-    public ResponseEntity<CargoDTO> put(@RequestParam("cargoDTO") CargoDTO cargoDTO) {
+    public ResponseEntity<CargoDTO> put(@RequestBody CargoDTO cargoDTO) {
         Cargo cargo = cargoService.findCargoByCode(cargoDTO.getCode());
         cargo.setCode(cargoDTO.getCode());
         cargo.setName(cargoDTO.getName());
-        return ResponseEntity.ok(cargoMapper.toDTO(cargoService.update(cargo)));
-        /// TODO: 11.05.2023 по какому параметру найти обект, который нужно обновить?
+        return ResponseEntity.ok(cargoMapper.toDTO(cargoService.put(cargo)));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<CargoDTO> getByCode(@PathVariable(name = "id") Long id) {
         return ResponseEntity.ok(cargoMapper.toDTO(cargoService.findById(id)));
-        /// TODO: 11.05.2023 Обычно получают по ID, но врятли он есть на фронте....
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<CheckDelete> delete(@PathVariable Long id) {
+    public void delete(@PathVariable Long id) {
         Cargo cargo = cargoService.findById(id);
         cargoService.delete(cargo);
-        return ResponseEntity.ok(new CheckDelete(true));
-        /// TODO: 11.05.2023 Обычно по ID, но откуда у фронта id? если в ДТО id не передают
     }
 }
