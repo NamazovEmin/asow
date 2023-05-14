@@ -37,7 +37,7 @@ public class CargoController {
         Cargo cargo = cargoService.findById(id);
         cargo.setCode(cargoDTO.getCode());
         cargo.setName(cargoDTO.getName());
-        return ResponseEntity.ok(cargoMapper.toDTO(cargoService.put(cargo)));
+        return ResponseEntity.ok(cargoMapper.toDTO(cargoService.save(cargo)));
     }
 
     @GetMapping("/{id}")

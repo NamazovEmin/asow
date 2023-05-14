@@ -24,8 +24,4 @@ public class WagonPassportService {
     public void delete(WagonPassport wagonPassport) {
         wagonPassportRepository.delete(wagonPassport);
     }
-
-    public WagonPassport put(WagonPassport wagonPassport) {
-        return wagonPassportRepository.save(wagonPassport);
-    }
 }

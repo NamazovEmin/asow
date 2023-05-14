@@ -17,10 +17,6 @@ public class CargoService {
         return cargoRepository.save(cargo);
     }
 
-    public Cargo put(Cargo cargo) {
-        return save(cargo);
-    }
-
     public void delete(Cargo cargo) {
         cargoRepository.delete(cargo);
     }

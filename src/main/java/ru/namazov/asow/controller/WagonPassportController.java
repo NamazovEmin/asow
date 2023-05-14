@@ -39,7 +39,7 @@ public class WagonPassportController {
         wagonPassport.setWagonType(wagonPassportDTO.getWagonType());
         wagonPassport.setCarryingCapacity(wagonPassportDTO.getCarryingCapacity());
         wagonPassport.setContainerWeight(wagonPassportDTO.getContainerWeight());
-        return ResponseEntity.ok(wagonPassportMapper.toDTO(wagonPassportService.put(wagonPassport)));
+        return ResponseEntity.ok(wagonPassportMapper.toDTO(wagonPassportService.save(wagonPassport)));
     }
 
     @GetMapping("/{id}")

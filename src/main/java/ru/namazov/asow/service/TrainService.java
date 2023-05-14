@@ -17,10 +17,6 @@ public class TrainService {
         return trainRepository.save(train);
     }
 
-    public void update(Train train) {
-        save(train);
-    }
-
     public Train findById(Long id) {
         return trainRepository.findById(id).orElseThrow();
     }

@@ -19,10 +19,6 @@ public class WagonService {
         return wagonRepository.save(wagon);
     }
 
-    public void update(Wagon wagon) {
-        save(wagon);
-    }
-
     public Wagon findById(Long id) {
         return wagonRepository.findById(id).orElseThrow();
     }

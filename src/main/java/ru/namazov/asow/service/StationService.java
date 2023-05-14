@@ -17,10 +17,6 @@ public class StationService {
         return stationRepository.save(station);
     }
 
-    public void update(Station station) {
-        save(station);
-    }
-
     public Station findById(Long id) {
         return stationRepository.findById(id).orElseThrow();
     }
