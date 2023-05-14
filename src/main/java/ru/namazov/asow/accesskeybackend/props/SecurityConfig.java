@@ -30,7 +30,8 @@ public class SecurityConfig {
                 .cors().disable()
                 .authorizeHttpRequests(auth ->
                         auth
-                                .requestMatchers("/**").permitAll()
+//                                .requestMatchers("/swagger-ui/**", "/javainuse-openapi/**").permitAll()
+//                                .requestMatchers("/**").permitAll()
 //                                .requestMatchers("/api/public/**").permitAll()
 //                                .requestMatchers("/actuator/health").permitAll()
                                 .anyRequest().authenticated()

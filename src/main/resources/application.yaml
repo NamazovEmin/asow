@@ -13,7 +13,4 @@ spring:
   springdoc.swagger-ui:
     enabled: true
     use-root-path: true
-server:
-  servlet:
-    context-path: /api
 

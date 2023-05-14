@@ -15,11 +15,13 @@ import ru.namazov.asow.entity.Cargo;
 import ru.namazov.asow.mapper.CargoMapper;
 import ru.namazov.asow.service.CargoService;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping(name = "/cargo")
+@RequestMapping(value = "/cargo")
 @AllArgsConstructor
+@SecurityRequirement(name = "authenticated")
 // TODO: 13.05.2023 программа игнорирует /cargo
 public class CargoController {
 
@@ -31,9 +33,9 @@ public class CargoController {
         return ResponseEntity.ok(cargoMapper.toDTO(cargoService.save(cargoMapper.toEntity(cargoDTO))));
     }
 
-    @PutMapping
-    public ResponseEntity<CargoDTO> put(@RequestBody CargoDTO cargoDTO) {
-        Cargo cargo = cargoService.findCargoByCode(cargoDTO.getCode());
+    @PutMapping("/{id}")
+    public ResponseEntity<CargoDTO> put(@RequestBody CargoDTO cargoDTO, @PathVariable(name = "id") Long id) {
+        Cargo cargo = cargoService.findById(id);
         cargo.setCode(cargoDTO.getCode());
         cargo.setName(cargoDTO.getName());
         return ResponseEntity.ok(cargoMapper.toDTO(cargoService.put(cargo)));
