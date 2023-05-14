@@ -1,4 +1,4 @@
-package ru.namazov.asow.config;
+package ru.namazov.asow.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

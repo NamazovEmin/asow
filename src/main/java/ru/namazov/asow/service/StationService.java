@@ -3,6 +3,7 @@ package ru.namazov.asow.service;
 import org.springframework.stereotype.Service;
 
 import ru.namazov.asow.entity.Station;
+import ru.namazov.asow.exception.NotFoundException;
 import ru.namazov.asow.repository.StationRepository;
 
 import lombok.AllArgsConstructor;
@@ -18,7 +19,8 @@ public class StationService {
     }
 
     public Station findById(Long id) {
-        return stationRepository.findById(id).orElseThrow();
+        return stationRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(String.format("Cargo with id %s not found", id)));
     }
 
     public void delete(Station station) {

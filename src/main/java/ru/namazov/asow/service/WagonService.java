@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import ru.namazov.asow.entity.Wagon;
+import ru.namazov.asow.exception.NotFoundException;
 import ru.namazov.asow.repository.WagonRepository;
 
 import lombok.AllArgsConstructor;
@@ -20,7 +21,8 @@ public class WagonService {
     }
 
     public Wagon findById(Long id) {
-        return wagonRepository.findById(id).orElseThrow();
+        return wagonRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(String.format("Cargo with id %s not found", id)));
     }
 
     public void delete(Wagon wagon) {
