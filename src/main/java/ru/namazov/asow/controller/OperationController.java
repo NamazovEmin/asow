@@ -36,7 +36,6 @@ public class OperationController {
 
     @PostMapping("/move")
     public ResponseEntity<Successful> moveWagons(@RequestBody List<WagonDTO> wagonDTOList, @RequestParam Long railway, @RequestBody Position position) {
-        // TODO: 12.05.2023 нужно получить переменную указывающую куда переместить вагоны, в голову или хвост
         return ResponseEntity.ok(new Successful(operationFacade.move(wagonMapper.toEntity(wagonDTOList), railway, position)));
     }
 
