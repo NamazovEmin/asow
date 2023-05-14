@@ -7,5 +7,7 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 @Setter
-public class OperationDTO {
+public class StationDTO {
+
+    private String name;
 }

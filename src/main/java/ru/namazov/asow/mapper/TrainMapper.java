@@ -3,13 +3,13 @@ package ru.namazov.asow.mapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
-import ru.namazov.asow.dto.CargoDTO;
-import ru.namazov.asow.entity.Cargo;
+import ru.namazov.asow.dto.TrainDTO;
+import ru.namazov.asow.entity.Train;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface CargoMapper {
+public interface TrainMapper {
 
-    Cargo toEntity(CargoDTO cargoDTO);
+    Train toEntity(TrainDTO trainDTO);
 
-    CargoDTO toDTO(Cargo cargo);
+    TrainDTO toDTO(Train train);
 }

@@ -11,10 +11,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @NoArgsConstructor
 @Table(name = "trains")
+@Setter
 public class Train {
 
     @Id
