@@ -1,13 +1,3 @@
-/*
- * Copyright (c) 2023, TopS BI LLC. All rights reserved.
- * http://www.topsbi.ru
- */
-
-/*
- * Copyright (c) 2023, TopS BI LLC. All rights reserved.
- * http://www.topsbi.ru
- */
-
 package ru.namazov.asow.facade;
 
 import java.util.ArrayList;
@@ -24,12 +14,12 @@ import ru.namazov.asow.entity.Operation;
 import ru.namazov.asow.entity.Railway;
 import ru.namazov.asow.entity.Wagon;
 import ru.namazov.asow.enums.OperationType;
+import ru.namazov.asow.enums.Position;
 import ru.namazov.asow.service.OperationService;
 import ru.namazov.asow.service.RailwayService;
 import ru.namazov.asow.service.WagonService;
 
 import lombok.AllArgsConstructor;
-import lombok.Synchronized;
 
 @Component
 @AllArgsConstructor
@@ -39,16 +29,16 @@ public class OperationFacadeImpl implements OperationFacade {
     private final WagonService wagonService;
     private final RailwayService railwayService;
     private final Long rjd = 1L;
+    private final ObjectMapper mapper = new JsonMapper();
 
 
     @Override
-    @Synchronized
     public boolean receive(List<Wagon> comingWagonList, Long railwayID) {
         Railway railwayToMove = railwayService.findById(railwayID);
         List<Wagon> movedWagonList = moveToTail(comingWagonList, railwayToMove);
         wagonService.saveAll(movedWagonList);
         List<Operation> operationList = new ArrayList<>();
-        movedWagonList.forEach(i -> operationList.add(new Operation(OperationType.RECEIVE, rjd, railwayID, i.getId())));
+        movedWagonList.forEach(i -> operationList.add(new Operation(OperationType.RECEIVE, rjd, railwayID,formStringFromWagon(i))));
         operationService.saveAll(operationList);
         return true;
     }
@@ -65,14 +55,19 @@ public class OperationFacadeImpl implements OperationFacade {
     }
 
     @Override
-    public boolean move(List<Wagon> wagonList, Long railwayID) {
-        try {
-            ObjectMapper mapper = new JsonMapper();
-            String expectedJson = mapper.writeValueAsString(wagonList.get(1));
-        }  catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
+    public boolean move(List<Wagon> wagonList, Long railwayID, Position position) {
+        Railway toRailway = railwayService.findById(railwayID);
+        List<Wagon> loadedWagonList;
 
+        if (position.getPosition() == 1) {
+            loadedWagonList = moveToHead(wagonList, toRailway);
+        } else {
+            loadedWagonList = moveToTail(wagonList, toRailway);
+        }
+        wagonService.saveAll(loadedWagonList);
+        List<Operation> operationList = new ArrayList<>();
+        loadedWagonList.forEach(i -> operationList.add(new Operation(OperationType.MOVE, railwayID, rjd, formStringFromWagon(i))));
+        operationService.saveAll(operationList);
         return true;
     }
 
@@ -82,7 +77,7 @@ public class OperationFacadeImpl implements OperationFacade {
         List<Wagon> loadedWagonList = moveToHead(comingWagonList, railwayToMove);
         wagonService.saveAll(loadedWagonList);
         List<Operation> operationList = new ArrayList<>();
-        loadedWagonList.forEach(i -> operationList.add(new Operation(OperationType.RECEIVE, railwayID, rjd, i.getId())));
+        loadedWagonList.forEach(i -> operationList.add(new Operation(OperationType.RECEIVE, railwayID, rjd, formStringFromWagon(i))));
         operationService.saveAll(operationList);
         return true;
     }
@@ -99,5 +94,17 @@ public class OperationFacadeImpl implements OperationFacade {
             comingWagonList.add(i);
         });
         return comingWagonList;
+    }
+
+    private String formStringFromWagon(Wagon wagon) {
+        try {
+            return form(wagon);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private String form(Wagon wagon) throws JsonProcessingException {
+        return mapper.writeValueAsString(wagon);
     }
 }

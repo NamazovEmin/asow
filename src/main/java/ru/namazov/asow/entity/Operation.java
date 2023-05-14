@@ -41,7 +41,7 @@ public class Operation {
     // TODO: 11.05.2023 как сохранить не вагон id, а состояние объекта на данный момент?
 
     @Column(name = "wagon_id")
-    private Long wagon_id;
+    private String wagon;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
@@ -53,10 +53,10 @@ public class Operation {
     @Column(name = "update_date")
     private Date updateDate;
 
-    public Operation(OperationType type, Long fromRailwayID, Long whereRailwayID, Long wagon_id) {
+    public Operation(OperationType type, Long fromRailwayID, Long whereRailwayID, String wagon) {
         this.type = type;
         this.fromRailwayID = fromRailwayID;
         this.whereRailwayID = whereRailwayID;
-        this.wagon_id = wagon_id;
+        this.wagon = wagon;
     }
 }
