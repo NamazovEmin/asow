@@ -38,7 +38,7 @@ public class Operation {
     @Column(name = "where_railway_id")
     private Long whereRailwayID;
 
-    // TODO: 11.05.2023 как сохранить не вагон id, а состояние обекта на данный момент?
+    // TODO: 11.05.2023 как сохранить не вагон id, а состояние объекта на данный момент?
 
     @Column(name = "wagon_id")
     private Long wagon_id;

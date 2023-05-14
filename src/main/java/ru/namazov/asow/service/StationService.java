@@ -1,7 +1,5 @@
 package ru.namazov.asow.service;
 
-import java.util.Optional;
-
 import org.springframework.stereotype.Service;
 
 import ru.namazov.asow.entity.Station;
@@ -23,8 +21,8 @@ public class StationService {
         save(station);
     }
 
-    public Optional<Station> findById(Long id) {
-        return stationRepository.findById(id);
+    public Station findById(Long id) {
+        return stationRepository.findById(id).orElseThrow();
     }
 
     public void delete(Station station) {

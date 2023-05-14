@@ -1,7 +1,6 @@
 package ru.namazov.asow.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -24,8 +23,8 @@ public class WagonService {
         save(wagon);
     }
 
-    public Optional<Wagon> findById(Long id) {
-        return wagonRepository.findById(id);
+    public Wagon findById(Long id) {
+        return wagonRepository.findById(id).orElseThrow();
     }
 
     public void delete(Wagon wagon) {

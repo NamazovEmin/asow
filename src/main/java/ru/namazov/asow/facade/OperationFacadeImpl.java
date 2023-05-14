@@ -14,6 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.json.JsonMapper;
+
 import org.springframework.stereotype.Component;
 
 import ru.namazov.asow.entity.Operation;
@@ -62,6 +66,13 @@ public class OperationFacadeImpl implements OperationFacade {
 
     @Override
     public boolean move(List<Wagon> wagonList, Long railwayID) {
+        try {
+            ObjectMapper mapper = new JsonMapper();
+            String expectedJson = mapper.writeValueAsString(wagonList.get(1));
+        }  catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
         return true;
     }
 

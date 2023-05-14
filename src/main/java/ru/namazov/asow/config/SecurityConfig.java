@@ -1,4 +1,9 @@
-package ru.namazov.asow.accesskeybackend.props;
+/*
+ * Copyright (c) 2023, TopS BI LLC. All rights reserved.
+ * http://www.topsbi.ru
+ */
+
+package ru.namazov.asow.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,10 +35,6 @@ public class SecurityConfig {
                 .cors().disable()
                 .authorizeHttpRequests(auth ->
                         auth
-//                                .requestMatchers("/swagger-ui/**", "/javainuse-openapi/**").permitAll()
-//                                .requestMatchers("/**").permitAll()
-//                                .requestMatchers("/api/public/**").permitAll()
-//                                .requestMatchers("/actuator/health").permitAll()
                                 .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())

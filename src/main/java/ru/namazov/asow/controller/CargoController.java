@@ -22,7 +22,6 @@ import lombok.AllArgsConstructor;
 @RequestMapping(value = "/cargo")
 @AllArgsConstructor
 @SecurityRequirement(name = "authenticated")
-// TODO: 13.05.2023 программа игнорирует /cargo
 public class CargoController {
 
     private final CargoMapper cargoMapper;
@@ -42,7 +41,7 @@ public class CargoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CargoDTO> getByCode(@PathVariable(name = "id") Long id) {
+    public ResponseEntity<CargoDTO> findById(@PathVariable(name = "id") Long id) {
         return ResponseEntity.ok(cargoMapper.toDTO(cargoService.findById(id)));
     }
 

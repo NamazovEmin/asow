@@ -25,9 +25,6 @@ public class CargoService {
         cargoRepository.delete(cargo);
     }
 
-    public Cargo findCargoByCode(Long code) {
-        return cargoRepository.findCargoByCode(code).orElseThrow();
-    }
 
     public Cargo findById(Long id) {
         return cargoRepository.findById(id).orElseThrow();

@@ -1,7 +1,5 @@
 package ru.namazov.asow.service;
 
-import java.util.Optional;
-
 import org.springframework.stereotype.Service;
 
 import ru.namazov.asow.entity.WagonPassport;
@@ -19,15 +17,15 @@ public class WagonPassportService {
         return wagonPassportRepository.save(wagonPassport);
     }
 
-    public void update(WagonPassport wagonPassport) {
-        save(wagonPassport);
-    }
-
-    public Optional<WagonPassport> findById(Long id) {
-        return wagonPassportRepository.findById(id);
+    public WagonPassport findById(Long id) {
+        return wagonPassportRepository.findById(id).orElseThrow();
     }
 
     public void delete(WagonPassport wagonPassport) {
         wagonPassportRepository.delete(wagonPassport);
+    }
+
+    public WagonPassport put(WagonPassport wagonPassport) {
+        return wagonPassportRepository.save(wagonPassport);
     }
 }

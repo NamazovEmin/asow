@@ -1,7 +1,5 @@
 package ru.namazov.asow.service;
 
-import java.util.Optional;
-
 import org.springframework.stereotype.Service;
 
 import ru.namazov.asow.entity.Train;
@@ -23,8 +21,8 @@ public class TrainService {
         save(train);
     }
 
-    public Optional<Train> findById(Long id) {
-        return trainRepository.findById(id);
+    public Train findById(Long id) {
+        return trainRepository.findById(id).orElseThrow();
     }
 
     public void delete(Train train) {
