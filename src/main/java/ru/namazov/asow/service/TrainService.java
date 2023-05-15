@@ -18,6 +18,11 @@ public class TrainService {
         return trainRepository.save(train);
     }
 
+    public Train put(Train train) {
+        trainRepository.findById(train.getId()).orElseThrow(() -> new NotFoundException(String.format("current Train with id %s not found to update", train.getId())));
+        return trainRepository.save(train);
+    }
+
     public Train findById(Long id) {
         return trainRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(String.format("Cargo with id %s not found", id)));

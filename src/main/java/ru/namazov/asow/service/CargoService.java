@@ -18,6 +18,11 @@ public class CargoService {
         return cargoRepository.save(cargo);
     }
 
+    public Cargo put(Cargo cargo) {
+        cargoRepository.findById(cargo.getId()).orElseThrow(() -> new NotFoundException(String.format("current Cargo with id %s not found to update", cargo.getId())));
+        return cargoRepository.save(cargo);
+    }
+
     public void delete(Cargo cargo) {
         cargoRepository.delete(cargo);
     }

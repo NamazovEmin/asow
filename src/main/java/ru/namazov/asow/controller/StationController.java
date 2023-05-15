@@ -39,10 +39,8 @@ public class StationController {
 
     @Operation(summary = "Station updating")
     @PutMapping("/{id}")
-    public ResponseEntity<StationDTO> put(@RequestBody StationDTO stationDTO, @PathVariable(name = "id") Long id) {
-        Station station = stationService.findById(id);
-        station.setName(stationDTO.getName());
-        return ResponseEntity.ok(stationMapper.toDTO(stationService.save(station)));
+    public ResponseEntity<StationDTO> put(@RequestBody StationDTO stationDTO) {
+        return ResponseEntity.ok(stationMapper.toDTO(stationService.put(stationMapper.toEntity(stationDTO))));
     }
 
     @Operation(summary = "Getting Station by id")

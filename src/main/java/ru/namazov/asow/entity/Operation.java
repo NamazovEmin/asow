@@ -15,12 +15,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @NoArgsConstructor
 @Setter
+@Getter
 @Table(name = "operations")
 public class Operation {
 
@@ -32,15 +34,13 @@ public class Operation {
     @Column(name = "type", nullable = false)
     private OperationType type;
 
-    @Column(name = "from_railway_id")
+    @Column(name = "from_railway_id", nullable = false)
     private Long fromRailwayID;
 
-    @Column(name = "where_railway_id")
+    @Column(name = "where_railway_id", nullable = false)
     private Long whereRailwayID;
 
-    // TODO: 11.05.2023 как сохранить не вагон id, а состояние объекта на данный момент?
-
-    @Column(name = "wagon_id")
+    @Column(name = "wagon_id", nullable = false)
     private String wagon;
 
     @CreationTimestamp

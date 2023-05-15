@@ -39,10 +39,8 @@ public class TrainController {
 
     @Operation(summary = "Train updating")
     @PutMapping("/{id}")
-    public ResponseEntity<TrainDTO> put(@RequestBody TrainDTO trainDTO, @PathVariable(name = "id") Long id) {
-        Train train = trainService.findById(id);
-        train.setWagonList(trainDTO.getWagonList());
-        return ResponseEntity.ok(trainMapper.toDTO(trainService.save(train)));
+    public ResponseEntity<TrainDTO> put(@RequestBody TrainDTO trainDTO) {
+        return ResponseEntity.ok(trainMapper.toDTO(trainService.put(trainMapper.toEntity(trainDTO))));
     }
 
     @Operation(summary = "Getting Train by id")

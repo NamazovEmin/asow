@@ -18,6 +18,11 @@ public class StationService {
         return stationRepository.save(station);
     }
 
+    public Station put(Station station) {
+        stationRepository.findById(station.getId()).orElseThrow(() -> new NotFoundException(String.format("current Station with id %s not found to update", station.getId())));
+        return stationRepository.save(station);
+    }
+
     public Station findById(Long id) {
         return stationRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(String.format("Cargo with id %s not found", id)));

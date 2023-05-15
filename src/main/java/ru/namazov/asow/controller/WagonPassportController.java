@@ -39,13 +39,8 @@ public class WagonPassportController {
 
     @Operation(summary = "WagonPassport updating")
     @PutMapping("/{id}")
-    public ResponseEntity<WagonPassportDTO> put(@RequestBody WagonPassportDTO wagonPassportDTO, @PathVariable(name = "id") Long id) {
-        WagonPassport wagonPassport = wagonPassportService.findById(id);
-        wagonPassport.setNumber(wagonPassportDTO.getNumber());
-        wagonPassport.setWagonType(wagonPassportDTO.getWagonType());
-        wagonPassport.setCarryingCapacity(wagonPassportDTO.getCarryingCapacity());
-        wagonPassport.setContainerWeight(wagonPassportDTO.getContainerWeight());
-        return ResponseEntity.ok(wagonPassportMapper.toDTO(wagonPassportService.save(wagonPassport)));
+    public ResponseEntity<WagonPassportDTO> put(@RequestBody WagonPassportDTO wagonPassportDTO) {
+        return ResponseEntity.ok(wagonPassportMapper.toDTO(wagonPassportService.put(wagonPassportMapper.toEntity(wagonPassportDTO))));
     }
 
     @Operation(summary = "Getting WagonPassport by id")

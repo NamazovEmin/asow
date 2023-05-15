@@ -1,8 +1,13 @@
 package ru.namazov.asow.entity;
 
+import java.util.Date;
 import java.util.List;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import jakarta.persistence.*;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
@@ -10,6 +15,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Table(name = "wagons")
 @Setter
+@Getter
 public class Wagon {
 
     @Id
@@ -18,7 +24,7 @@ public class Wagon {
     private Long id;
 
     @OneToOne()
-    @JoinColumn(name="wagon_passports_id")
+    @JoinColumn(name="wagon_passports_id", nullable = false)
     private WagonPassport wagonPassport;
 
     @Column(name = "serial_number")
@@ -41,6 +47,16 @@ public class Wagon {
     @ManyToOne
     @JoinColumn(name = "railways_id")
     private Railway railway;
+
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "create_date", updatable = false)
+    private Date createDate;
+
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "update_date")
+    private Date updateDate;
 
     public Long getId() {
         return id;

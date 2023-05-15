@@ -20,9 +20,14 @@ public class WagonService {
         return wagonRepository.save(wagon);
     }
 
+    public Wagon put(Wagon wagon) {
+        wagonRepository.findById(wagon.getId()).orElseThrow(() -> new NotFoundException(String.format("current Wagon with id %s not found to update", wagon.getId())));
+        return wagonRepository.save(wagon);
+    }
+
     public Wagon findById(Long id) {
         return wagonRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(String.format("Cargo with id %s not found", id)));
+                .orElseThrow(() -> new NotFoundException(String.format("Wagon with id %s not found", id)));
     }
 
     public void delete(Wagon wagon) {

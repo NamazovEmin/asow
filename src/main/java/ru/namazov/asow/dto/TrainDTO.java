@@ -1,6 +1,5 @@
 package ru.namazov.asow.dto;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import ru.namazov.asow.entity.Wagon;
@@ -14,6 +13,8 @@ import lombok.Setter;
 @Setter
 public class TrainDTO {
 
-    private List<Wagon> wagonList = new ArrayList<>();
+    private Long id;
+
+    private List<Wagon> wagonList;
 }
 

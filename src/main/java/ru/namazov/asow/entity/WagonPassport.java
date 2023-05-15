@@ -1,5 +1,10 @@
 package ru.namazov.asow.entity;
 
+import java.util.Date;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import ru.namazov.asow.enums.WagonType;
 
 import jakarta.persistence.Column;
@@ -8,6 +13,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
@@ -15,6 +23,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Table(name = "wagon_passports")
 @Setter
+@Getter
 public class WagonPassport {
 
     @Id
@@ -33,4 +42,14 @@ public class WagonPassport {
 
     @Column(name = "carrying_capacity")
     private Long carryingCapacity;
+
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "create_date", updatable = false)
+    private Date createDate;
+
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "update_date")
+    private Date updateDate;
 }

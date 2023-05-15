@@ -39,11 +39,8 @@ public class CargoController {
 
     @Operation(summary = "Cargo updating")
     @PutMapping("/{id}")
-    public ResponseEntity<CargoDTO> put(@RequestBody CargoDTO cargoDTO, @PathVariable(name = "id") Long id) {
-        Cargo cargo = cargoService.findById(id);
-        cargo.setCode(cargoDTO.getCode());
-        cargo.setName(cargoDTO.getName());
-        return ResponseEntity.ok(cargoMapper.toDTO(cargoService.save(cargo)));
+    public ResponseEntity<CargoDTO> put(@RequestBody CargoDTO cargoDTO) {
+        return ResponseEntity.ok(cargoMapper.toDTO(cargoService.put(cargoMapper.toEntity(cargoDTO))));
     }
 
     @Operation(summary = "Getting Cargo by id")

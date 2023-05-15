@@ -18,6 +18,11 @@ public class WagonPassportService {
         return wagonPassportRepository.save(wagonPassport);
     }
 
+    public WagonPassport put(WagonPassport wagonPassport) {
+        wagonPassportRepository.findById(wagonPassport.getId()).orElseThrow(() -> new NotFoundException(String.format("current WagonPassport with id %s not found to update", wagonPassport.getId())));
+        return wagonPassportRepository.save(wagonPassport);
+    }
+
     public WagonPassport findById(Long id) {
         return wagonPassportRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(String.format("Cargo with id %s not found", id)));

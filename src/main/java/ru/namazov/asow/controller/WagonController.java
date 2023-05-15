@@ -17,9 +17,13 @@ import ru.namazov.asow.service.WagonService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
+
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Tag(name = "Wagon", description = "CRUD operations with Wagon")
 @RestController
@@ -33,7 +37,10 @@ public class WagonController {
 
     @Operation(summary = "Wagon creating")
     @PostMapping
-    public ResponseEntity<WagonDTO> save(@RequestBody WagonDTO wagonDTO) {
+    public ResponseEntity<WagonDTO> save(
+                    @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Wagon to be created",
+                    required = true, content = @Content(mediaType = APPLICATION_JSON_VALUE, schema = @Schema(implementation = WagonDTO.class)))
+                    @RequestBody WagonDTO wagonDTO) {
         return ResponseEntity.ok(wagonMapper.toDTO(wagonService.save(wagonMapper.toEntity(wagonDTO))));
     }
 
@@ -63,7 +70,8 @@ public class WagonController {
     @DeleteMapping("/{id}")
     public void delete(
             @Parameter(description = "id of Wagon to be deleted")
-            @PathVariable Long id) {
+            @PathVariable Long id)
+    {
         Wagon wagon = wagonService.findById(id);
         wagonService.delete(wagon);
     }

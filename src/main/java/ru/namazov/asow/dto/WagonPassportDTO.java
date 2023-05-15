@@ -11,6 +11,8 @@ import lombok.Setter;
 @Setter
 public class WagonPassportDTO {
 
+    private Long id;
+
     private Long number;
 
     private WagonType wagonType;
