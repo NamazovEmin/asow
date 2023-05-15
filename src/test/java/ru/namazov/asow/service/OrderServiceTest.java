@@ -10,12 +10,12 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import ru.namazov.asow.entity.Order;
-import ru.namazov.asow.repository.TrainRepository;
+import ru.namazov.asow.repository.OrderRepository;
 
 class OrderServiceTest {
 
-    private final TrainRepository trainRepository = Mockito.mock(TrainRepository.class);
-    private final TrainService trainService = new TrainService(trainRepository);
+    private final OrderRepository orderRepository = Mockito.mock(OrderRepository.class);
+    private final OrderService orderService = new OrderService(orderRepository);
 
     @BeforeEach
     void setUp() {
@@ -34,9 +34,9 @@ class OrderServiceTest {
         expectedOrder.setWagonList(new ArrayList<>());
         expectedOrder.setId(1L);
 
-        Mockito.when(trainRepository.save(order)).thenReturn(expectedOrder);
+        Mockito.when(orderRepository.save(order)).thenReturn(expectedOrder);
 
-        Order actualOrder = trainService.save(order);
+        Order actualOrder = orderService.save(order);
 
         Assertions.assertEquals(expectedOrder, actualOrder);
     }
@@ -49,9 +49,9 @@ class OrderServiceTest {
         expectedOrder.setWagonList(new ArrayList<>());
         expectedOrder.setId(1L);
 
-        Mockito.when(trainRepository.findById(id)).thenReturn(Optional.of(expectedOrder));
+        Mockito.when(orderRepository.findById(id)).thenReturn(Optional.of(expectedOrder));
 
-        Order actualOrder = trainService.findById(id);
+        Order actualOrder = orderService.findById(id);
 
         Assertions.assertEquals(expectedOrder, actualOrder);
     }

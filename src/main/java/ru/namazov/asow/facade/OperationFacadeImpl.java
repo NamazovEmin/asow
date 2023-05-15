@@ -33,14 +33,13 @@ public class OperationFacadeImpl implements OperationFacade {
 
 
     @Override
-    public boolean receive(List<Wagon> comingWagonList, Long railwayID) {
+    public List<Operation> receive(List<Wagon> comingWagonList, Long railwayID) {
         Railway railwayToMove = railwayService.findById(railwayID);
         List<Wagon> movedWagonList = moveToTail(comingWagonList, railwayToMove);
         wagonService.saveAll(movedWagonList);
         List<Operation> operationList = new ArrayList<>();
         movedWagonList.forEach(i -> operationList.add(new Operation(OperationType.RECEIVE, rjd, railwayID,formStringFromWagon(i))));
-        operationService.saveAll(operationList);
-        return true;
+        return operationService.saveAll(operationList);
     }
 
     private List<Wagon> moveToTail(List<Wagon> comingWagonList, Railway railwayToMove) {
@@ -55,7 +54,7 @@ public class OperationFacadeImpl implements OperationFacade {
     }
 
     @Override
-    public boolean move(List<Wagon> wagonList, Long railwayID, Position position) {
+    public List<Operation> move(List<Wagon> wagonList, Long railwayID, Position position) {
         Railway toRailway = railwayService.findById(railwayID);
         List<Wagon> loadedWagonList;
 
@@ -67,19 +66,17 @@ public class OperationFacadeImpl implements OperationFacade {
         wagonService.saveAll(loadedWagonList);
         List<Operation> operationList = new ArrayList<>();
         loadedWagonList.forEach(i -> operationList.add(new Operation(OperationType.MOVE, railwayID, rjd, formStringFromWagon(i))));
-        operationService.saveAll(operationList);
-        return true;
+        return operationService.saveAll(operationList);
     }
 
     @Override
-    public boolean bringBack(List<Wagon> comingWagonList, Long railwayID) {
+    public List<Operation> bringBack(List<Wagon> comingWagonList, Long railwayID) {
         Railway railwayToMove = railwayService.findById(railwayID);
         List<Wagon> loadedWagonList = moveToHead(comingWagonList, railwayToMove);
         wagonService.saveAll(loadedWagonList);
         List<Operation> operationList = new ArrayList<>();
         loadedWagonList.forEach(i -> operationList.add(new Operation(OperationType.RECEIVE, railwayID, rjd, formStringFromWagon(i))));
-        operationService.saveAll(operationList);
-        return true;
+        return operationService.saveAll(operationList);
     }
 
     private List<Wagon> moveToHead(List<Wagon> comingWagonList, Railway railwayToMove) {

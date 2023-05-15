@@ -3,13 +3,13 @@ package ru.namazov.asow.mapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
-import ru.namazov.asow.dto.TrainDTO;
+import ru.namazov.asow.dto.OrderDTO;
 import ru.namazov.asow.entity.Order;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
-public interface TrainMapper {
+public interface OrderMapper {
 
-    Order toEntity(TrainDTO trainDTO);
+    Order toEntity(OrderDTO orderDTO);
 
-    TrainDTO toDTO(Order order);
+    OrderDTO toDTO(Order order);
 }

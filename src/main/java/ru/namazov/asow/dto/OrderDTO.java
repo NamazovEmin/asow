@@ -11,7 +11,7 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 @Setter
-public class TrainDTO {
+public class OrderDTO {
 
     private Long id;
 

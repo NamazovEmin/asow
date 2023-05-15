@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 import ru.namazov.asow.entity.Order;
 
 @Repository
-public interface TrainRepository extends JpaRepository<Order, Long> {
+public interface OrderRepository extends JpaRepository<Order, Long> {
 }

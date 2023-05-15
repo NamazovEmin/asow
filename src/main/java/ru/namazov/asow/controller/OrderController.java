@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import ru.namazov.asow.dto.TrainDTO;
+import ru.namazov.asow.dto.OrderDTO;
 import ru.namazov.asow.entity.Order;
-import ru.namazov.asow.mapper.TrainMapper;
-import ru.namazov.asow.service.TrainService;
+import ru.namazov.asow.mapper.OrderMapper;
+import ru.namazov.asow.service.OrderService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -21,44 +21,44 @@ import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 
-@Tag(name = "Train", description = "CRUD operations with Train")
+@Tag(name = "Order", description = "CRUD operations with Order")
 @RestController
-@RequestMapping(value = "/train")
+@RequestMapping(value = "/Order")
 @AllArgsConstructor
 @SecurityRequirement(name = "authenticated")
-public class TrainController {
+public class OrderController {
 
-    private final TrainMapper trainMapper;
-    private final TrainService trainService;
+    private final OrderMapper orderMapper;
+    private final OrderService orderService;
 
-    @Operation(summary = "Train creating")
+    @Operation(summary = "Order creating")
     @PostMapping
-    public ResponseEntity<TrainDTO> save(@RequestBody TrainDTO trainDTO) {
-        return ResponseEntity.ok(trainMapper.toDTO(trainService.save(trainMapper.toEntity(trainDTO))));
+    public ResponseEntity<OrderDTO> save(@RequestBody OrderDTO orderDTO) {
+        return ResponseEntity.ok(orderMapper.toDTO(orderService.save(orderMapper.toEntity(orderDTO))));
     }
 
-    @Operation(summary = "Train updating")
+    @Operation(summary = "Order updating")
     @PutMapping("/{id}")
-    public ResponseEntity<TrainDTO> put(@RequestBody TrainDTO trainDTO) {
-        return ResponseEntity.ok(trainMapper.toDTO(trainService.put(trainMapper.toEntity(trainDTO))));
+    public ResponseEntity<OrderDTO> put(@RequestBody OrderDTO orderDTO) {
+        return ResponseEntity.ok(orderMapper.toDTO(orderService.put(orderMapper.toEntity(orderDTO))));
     }
 
-    @Operation(summary = "Getting Train by id")
+    @Operation(summary = "Getting Order by id")
     @GetMapping("/{id}")
-    public ResponseEntity<TrainDTO> findById(
+    public ResponseEntity<OrderDTO> findById(
             @Parameter(description = "id of Train to be searched")
             @PathVariable(name = "id") Long id)
     {
-        return ResponseEntity.ok(trainMapper.toDTO(trainService.findById(id)));
+        return ResponseEntity.ok(orderMapper.toDTO(orderService.findById(id)));
     }
 
-    @Operation(summary = "Train deleting")
+    @Operation(summary = "Order deleting")
     @DeleteMapping("/{id}")
     public void delete(
             @Parameter(description = "id of Train to be deleted")
             @PathVariable Long id)
     {
-        Order order = trainService.findById(id);
-        trainService.delete(order);
+        Order order = orderService.findById(id);
+        orderService.delete(order);
     }
 }

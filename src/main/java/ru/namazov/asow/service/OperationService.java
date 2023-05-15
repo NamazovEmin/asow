@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import ru.namazov.asow.entity.Operation;
+import ru.namazov.asow.exception.NotFoundException;
 import ru.namazov.asow.repository.OperationRepository;
 
 import lombok.AllArgsConstructor;
@@ -17,5 +18,20 @@ public class OperationService {
 
     public List<Operation> saveAll(List<Operation> operationList) {
         return operationRepository.saveAll(operationList);
+    }
+
+    public Operation findById(Long id) {
+        return operationRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(String.format("Operation with id %s not found", id)));
+    }
+
+    public Operation put(Operation operation) {
+        operationRepository.findById(operation.getId())
+                .orElseThrow(() -> new NotFoundException(String.format("current operation with id %s not found to update", operation.getId())));
+        return operationRepository.save(operation);
+    }
+
+    public void delete(Operation operation) {
+        operationRepository.delete(operation);
     }
 }
