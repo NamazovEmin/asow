@@ -1,14 +1,8 @@
 package ru.namazov.asow.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.Table;
+import java.util.List;
+
+import jakarta.persistence.*;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
@@ -23,16 +17,19 @@ public class Wagon {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(optional=false)
+    @OneToOne()
     @JoinColumn(name="wagon_passports_id")
     private WagonPassport wagonPassport;
 
     @Column(name = "serial_number")
     private Long serialNumber;
 
-    @OneToOne
-    @JoinColumn(name="cargos_id")
-    private Cargo cargo;
+    @ManyToMany
+    @JoinTable(
+            name = "cargos_in_wagon",
+            joinColumns = @JoinColumn(name = "wagons_id"),
+            inverseJoinColumns = @JoinColumn(name = "cargos_id"))
+    private List<Cargo> cargosList;
 
     @Column(name = "cargo_weight")
     private Long cargosWeight;

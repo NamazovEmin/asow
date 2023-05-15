@@ -1,5 +1,7 @@
 package ru.namazov.asow.dto;
 
+import java.util.List;
+
 import ru.namazov.asow.entity.Cargo;
 import ru.namazov.asow.entity.Railway;
 import ru.namazov.asow.entity.Train;
@@ -18,7 +20,7 @@ public class WagonDTO {
 
     private Long serialNumber;
 
-    private Cargo cargo;
+    private List<Cargo> cargosList;
 
     private Long cargosWeight;
 

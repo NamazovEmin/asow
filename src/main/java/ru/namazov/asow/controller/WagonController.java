@@ -37,7 +37,7 @@ public class WagonController {
         Wagon wagon = wagonService.findById(id);
         wagon.setWagonPassport(wagonDTO.getWagonPassport());
         wagon.setSerialNumber(wagonDTO.getSerialNumber());
-        wagon.setCargo(wagonDTO.getCargo());
+        wagon.setCargosList(wagonDTO.getCargosList());
         wagon.setCargosWeight(wagonDTO.getCargosWeight());
         wagon.setTrain(wagonDTO.getTrain());
         wagon.setRailway(wagonDTO.getRailway());
