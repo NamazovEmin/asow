@@ -22,6 +22,7 @@ import ru.namazov.asow.mapper.WagonMapper;
 import ru.namazov.asow.service.OperationService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -56,7 +57,10 @@ public class OperationController {
 
     @Operation(summary = "Getting Operation by id")
     @GetMapping("/{id}")
-    public ResponseEntity<OperationDTO> findById(@PathVariable("id") Long id) {
+    public ResponseEntity<OperationDTO> findById(
+            @Parameter(description = "id of Operation to be searched")
+            @PathVariable("id") Long id)
+    {
         return ResponseEntity.ok(operationMapper.toDTO(operationService.findById(id)));
     }
 
@@ -68,7 +72,10 @@ public class OperationController {
 
     @Operation(summary = "Operation deleting")
     @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable("id") Long id) {
+    public void deleteById(
+            @Parameter(description = "id of Operation to be deleted")
+            @PathVariable("id") Long id)
+    {
         operationService.deleteById(id);
     }
 }
