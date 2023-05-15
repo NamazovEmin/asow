@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ru.namazov.asow.dto.WagonDTO;
-import ru.namazov.asow.entity.Wagon;
 import ru.namazov.asow.mapper.WagonMapper;
 import ru.namazov.asow.service.WagonService;
 
@@ -61,11 +60,10 @@ public class WagonController {
 
     @Operation(summary = "Wagon deleting")
     @DeleteMapping("/{id}")
-    public void delete(
+    public void deleteById(
             @Parameter(description = "id of Wagon to be deleted")
             @PathVariable Long id)
     {
-        Wagon wagon = wagonService.findById(id);
-        wagonService.delete(wagon);
+        wagonService.deleteById(id);
     }
 }

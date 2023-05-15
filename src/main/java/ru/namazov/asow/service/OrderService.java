@@ -19,16 +19,18 @@ public class OrderService {
     }
 
     public Order put(Order order) {
-        orderRepository.findById(order.getId()).orElseThrow(() -> new NotFoundException(String.format("current Train with id %s not found to update", order.getId())));
+        orderRepository.findById(order.getId()).orElseThrow(() -> new NotFoundException(String.format("current Order with id %s not found to update", order.getId())));
         return orderRepository.save(order);
     }
 
     public Order findById(Long id) {
         return orderRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(String.format("Cargo with id %s not found", id)));
+                .orElseThrow(() -> new NotFoundException(String.format("Order with id %s not found", id)));
     }
 
-    public void delete(Order order) {
-        orderRepository.delete(order);
+    public void deleteById(Long id) {
+        orderRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(String.format("Order with id %s not found", id)));
+        orderRepository.deleteById(id);
     }
 }

@@ -25,10 +25,12 @@ public class RailwayService {
 
     public Railway findById(Long id) {
         return railwayRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(String.format("Cargo with id %s not found", id)));
+                .orElseThrow(() -> new NotFoundException(String.format("Railway with id %s not found", id)));
     }
 
-    public void delete(Railway railway) {
-        railwayRepository.delete(railway);
+    public void deleteById(Long id) {
+        railwayRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(String.format("Railway with id %s not found", id)));
+        railwayRepository.deleteById(id);
     }
 }

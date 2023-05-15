@@ -25,10 +25,12 @@ public class StationService {
 
     public Station findById(Long id) {
         return stationRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(String.format("Cargo with id %s not found", id)));
+                .orElseThrow(() -> new NotFoundException(String.format("Station with id %s not found", id)));
     }
 
-    public void delete(Station station) {
-        stationRepository.delete(station);
+    public void deleteById(Long id) {
+        stationRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(String.format("Station with id %s not found", id)));
+        stationRepository.deleteById(id);
     }
 }

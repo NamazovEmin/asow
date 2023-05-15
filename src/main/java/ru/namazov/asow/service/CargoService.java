@@ -23,13 +23,14 @@ public class CargoService {
         return cargoRepository.save(cargo);
     }
 
-    public void delete(Cargo cargo) {
-        cargoRepository.delete(cargo);
-    }
-
-
     public Cargo findById(Long id) {
         return cargoRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(String.format("Cargo with id %s not found", id)));
+    }
+
+    public void deleteById(Long id) {
+        cargoRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(String.format("Cargo with id %s not found", id)));
+        cargoRepository.deleteById(id);
     }
 }

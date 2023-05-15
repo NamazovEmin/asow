@@ -25,10 +25,12 @@ public class WagonPassportService {
 
     public WagonPassport findById(Long id) {
         return wagonPassportRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(String.format("Cargo with id %s not found", id)));
+                .orElseThrow(() -> new NotFoundException(String.format("WagonPassport with id %s not found", id)));
     }
 
-    public void delete(WagonPassport wagonPassport) {
-        wagonPassportRepository.delete(wagonPassport);
+    public void deleteById(Long id) {
+        wagonPassportRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(String.format("WagonPassport with id %s not found", id)));
+        wagonPassportRepository.deleteById(id);
     }
 }

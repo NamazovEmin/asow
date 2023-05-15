@@ -30,11 +30,13 @@ public class WagonService {
                 .orElseThrow(() -> new NotFoundException(String.format("Wagon with id %s not found", id)));
     }
 
-    public void delete(Wagon wagon) {
-        wagonRepository.delete(wagon);
-    }
-
     public List<Wagon> saveAll(List<Wagon> wagonList) {
         return wagonRepository.saveAll(wagonList);
+    }
+
+    public void deleteById(Long id) {
+        wagonRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(String.format("Wagon with id %s not found", id)));
+        wagonRepository.deleteById(id);
     }
 }

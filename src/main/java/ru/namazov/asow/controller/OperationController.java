@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ru.namazov.asow.dto.OperationDTO;
 import ru.namazov.asow.dto.WagonDTO;
-import ru.namazov.asow.entity.Operation;
 import ru.namazov.asow.enums.Position;
 import ru.namazov.asow.facade.OperationFacade;
 import ru.namazov.asow.mapper.OperationMapper;
@@ -65,9 +64,7 @@ public class OperationController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable("id") Long id) {
-        Operation operation = operationService.findById(id);
-        operationService.delete(operation);
+    public void deleteById(@PathVariable("id") Long id) {
+        operationService.deleteById(id);
     }
-
 }

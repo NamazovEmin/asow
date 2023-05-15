@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ru.namazov.asow.dto.OrderDTO;
-import ru.namazov.asow.entity.Order;
 import ru.namazov.asow.mapper.OrderMapper;
 import ru.namazov.asow.service.OrderService;
 
@@ -54,11 +53,10 @@ public class OrderController {
 
     @Operation(summary = "Order deleting")
     @DeleteMapping("/{id}")
-    public void delete(
+    public void deleteById(
             @Parameter(description = "id of Train to be deleted")
             @PathVariable Long id)
     {
-        Order order = orderService.findById(id);
-        orderService.delete(order);
+        orderService.deleteById(id);
     }
 }

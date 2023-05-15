@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ru.namazov.asow.dto.RailwayDTO;
-import ru.namazov.asow.entity.Railway;
 import ru.namazov.asow.mapper.RailwayMapper;
 import ru.namazov.asow.service.RailwayService;
 
@@ -28,19 +27,19 @@ import lombok.AllArgsConstructor;
 @SecurityRequirement(name = "authenticated")
 public class RailwayController {
 
-    private final RailwayMapper cargoMapper;
-    private final RailwayService cargoService;
+    private final RailwayMapper railwayMapper;
+    private final RailwayService railwayService;
 
     @Operation(summary = "Railway creating")
     @PostMapping
     public ResponseEntity<RailwayDTO> save(@RequestBody RailwayDTO railwayDTO) {
-        return ResponseEntity.ok(cargoMapper.toDTO(cargoService.save(cargoMapper.toEntity(railwayDTO))));
+        return ResponseEntity.ok(railwayMapper.toDTO(railwayService.save(railwayMapper.toEntity(railwayDTO))));
     }
 
     @Operation(summary = "Railway updating")
     @PutMapping("/{id}")
     public ResponseEntity<RailwayDTO> put(@RequestBody RailwayDTO railwayDTO) {
-        return ResponseEntity.ok(cargoMapper.toDTO(cargoService.put(cargoMapper.toEntity(railwayDTO))));
+        return ResponseEntity.ok(railwayMapper.toDTO(railwayService.put(railwayMapper.toEntity(railwayDTO))));
     }
 
     @Operation(summary = "Getting Railway by id")
@@ -49,16 +48,15 @@ public class RailwayController {
             @Parameter(description = "id of Railway to be searched")
             @PathVariable(name = "id") Long id)
     {
-        return ResponseEntity.ok(cargoMapper.toDTO(cargoService.findById(id)));
+        return ResponseEntity.ok(railwayMapper.toDTO(railwayService.findById(id)));
     }
 
     @Operation(summary = "Railway deleting")
     @DeleteMapping("/{id}")
-    public void delete(
+    public void deleteById(
             @Parameter(description = "id of Railway to be deleted")
             @PathVariable Long id)
     {
-        Railway railway = cargoService.findById(id);
-        cargoService.delete(railway);
+        railwayService.deleteById(id);
     }
 }

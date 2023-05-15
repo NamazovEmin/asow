@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ru.namazov.asow.dto.CargoDTO;
-import ru.namazov.asow.entity.Cargo;
 import ru.namazov.asow.mapper.CargoMapper;
 import ru.namazov.asow.service.CargoService;
 
@@ -54,11 +53,10 @@ public class CargoController {
 
     @Operation(summary = "Cargo deleting")
     @DeleteMapping("/{id}")
-    public void delete(
+    public void deleteById(
             @Parameter(description = "id of Cargo to be deleted")
             @PathVariable Long id)
     {
-        Cargo cargo = cargoService.findById(id);
-        cargoService.delete(cargo);
+        cargoService.deleteById(id);
     }
 }
