@@ -16,6 +16,7 @@ import ru.namazov.asow.mapper.WagonPassportMapper;
 import ru.namazov.asow.service.WagonPassportService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -49,7 +50,10 @@ public class WagonPassportController {
 
     @Operation(summary = "Getting WagonPassport by id")
     @GetMapping("/{id}")
-    public ResponseEntity<WagonPassportDTO> findById(@PathVariable(name = "id") Long id) {
+    public ResponseEntity<WagonPassportDTO> findById(
+            @Parameter(description = "id of WagonPassport to be searched")
+            @PathVariable(name = "id") Long id)
+    {
         return ResponseEntity.ok(wagonPassportMapper.toDTO(wagonPassportService.findById(id)));
     }
 

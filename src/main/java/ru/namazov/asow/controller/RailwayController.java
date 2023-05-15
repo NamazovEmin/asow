@@ -16,6 +16,7 @@ import ru.namazov.asow.mapper.RailwayMapper;
 import ru.namazov.asow.service.RailwayService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -46,7 +47,10 @@ public class RailwayController {
 
     @Operation(summary = "Getting Railway by id")
     @GetMapping("/{id}")
-    public ResponseEntity<RailwayDTO> findById(@PathVariable(name = "id") Long id) {
+    public ResponseEntity<RailwayDTO> findById(
+            @Parameter(description = "id of Railway to be searched")
+            @PathVariable(name = "id") Long id)
+    {
         return ResponseEntity.ok(cargoMapper.toDTO(cargoService.findById(id)));
     }
 

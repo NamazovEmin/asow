@@ -16,6 +16,7 @@ import ru.namazov.asow.mapper.StationMapper;
 import ru.namazov.asow.service.StationService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -46,7 +47,10 @@ public class StationController {
 
     @Operation(summary = "Getting Station by id")
     @GetMapping("/{id}")
-    public ResponseEntity<StationDTO> findById(@PathVariable(name = "id") Long id) {
+    public ResponseEntity<StationDTO> findById(
+            @Parameter(description = "id of Station to be searched")
+            @PathVariable(name = "id") Long id)
+    {
         return ResponseEntity.ok(stationMapper.toDTO(stationService.findById(id)));
     }
 
