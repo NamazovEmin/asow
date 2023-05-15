@@ -1,5 +1,6 @@
 package ru.namazov.asow.service;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import org.junit.jupiter.api.AfterEach;
@@ -8,7 +9,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
-import ru.namazov.asow.entity.Cargo;
 import ru.namazov.asow.entity.Railway;
 import ru.namazov.asow.entity.Wagon;
 import ru.namazov.asow.entity.WagonPassport;
@@ -32,14 +32,14 @@ class WagonServiceTest {
         Wagon wagon = new Wagon();
         wagon.setWagonPassport(new WagonPassport());
         wagon.setSerialNumber(1L);
-        wagon.setCargo(new Cargo());
+        wagon.setCargosList(new ArrayList<>());
         wagon.setCargosWeight(200L);
         wagon.setRailway(new Railway());
 
         Wagon expectedWagon = new Wagon();
         expectedWagon.setWagonPassport(new WagonPassport());
         expectedWagon.setSerialNumber(1L);
-        expectedWagon.setCargo(new Cargo());
+        expectedWagon.setCargosList(new ArrayList<>());
         expectedWagon.setCargosWeight(200L);
         expectedWagon.setRailway(new Railway());
         expectedWagon.setId(1L);
@@ -61,7 +61,7 @@ class WagonServiceTest {
         Wagon expectedWagon = new Wagon();
         expectedWagon.setWagonPassport(new WagonPassport());
         expectedWagon.setSerialNumber(1L);
-        expectedWagon.setCargo(new Cargo());
+        expectedWagon.setCargosList(new ArrayList<>());
         expectedWagon.setCargosWeight(200L);
         expectedWagon.setRailway(new Railway());
         expectedWagon.setId(1L);

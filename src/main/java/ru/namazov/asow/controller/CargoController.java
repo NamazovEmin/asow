@@ -15,9 +15,12 @@ import ru.namazov.asow.entity.Cargo;
 import ru.namazov.asow.mapper.CargoMapper;
 import ru.namazov.asow.service.CargoService;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 
+@Tag(name = "Cargo", description = "CRUD operations with Cargo")
 @RestController
 @RequestMapping(value = "/cargo")
 @AllArgsConstructor
@@ -27,11 +30,13 @@ public class CargoController {
     private final CargoMapper cargoMapper;
     private final CargoService cargoService;
 
+    @Operation(summary = "Cargo creating")
     @PostMapping
     public ResponseEntity<CargoDTO> save(@RequestBody CargoDTO cargoDTO) {
         return ResponseEntity.ok(cargoMapper.toDTO(cargoService.save(cargoMapper.toEntity(cargoDTO))));
     }
 
+    @Operation(summary = "Cargo updating")
     @PutMapping("/{id}")
     public ResponseEntity<CargoDTO> put(@RequestBody CargoDTO cargoDTO, @PathVariable(name = "id") Long id) {
         Cargo cargo = cargoService.findById(id);
@@ -40,11 +45,13 @@ public class CargoController {
         return ResponseEntity.ok(cargoMapper.toDTO(cargoService.save(cargo)));
     }
 
+    @Operation(summary = "Getting Cargo by id")
     @GetMapping("/{id}")
     public ResponseEntity<CargoDTO> findById(@PathVariable(name = "id") Long id) {
         return ResponseEntity.ok(cargoMapper.toDTO(cargoService.findById(id)));
     }
 
+    @Operation(summary = "Cargo deleting")
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         Cargo cargo = cargoService.findById(id);

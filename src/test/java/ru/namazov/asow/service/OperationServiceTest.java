@@ -43,6 +43,7 @@ class OperationServiceTest {
         expectedOperation.setWhereRailwayID(2L);
         operation.setWagon("adad");
         expectedOperation.setId(1L);
+        expectedOperationList.add(expectedOperation);
 
         Mockito.when(operationRepository.saveAll(operationList)).thenReturn(expectedOperationList);
 
