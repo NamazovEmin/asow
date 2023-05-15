@@ -21,11 +21,12 @@ import ru.namazov.asow.mapper.OperationMapper;
 import ru.namazov.asow.mapper.WagonMapper;
 import ru.namazov.asow.service.OperationService;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 
-@Tag(name = "Operation", description = "CRUD operations with Operation")
+@Tag(name = "Operation", description = "operations with Operation")
 @RestController
 @AllArgsConstructor
 @RequestMapping(value = "/operation")
@@ -53,16 +54,19 @@ public class OperationController {
         return ResponseEntity.ok(operationMapper.toDTO(operationFacade.bringBack(wagonMapper.toEntity(wagonDTOList), railway)));
     }
 
+    @Operation(summary = "Getting Operation by id")
     @GetMapping("/{id}")
     public ResponseEntity<OperationDTO> findById(@PathVariable("id") Long id) {
         return ResponseEntity.ok(operationMapper.toDTO(operationService.findById(id)));
     }
 
+    @Operation(summary = "Operation updating")
     @PutMapping
     public ResponseEntity<OperationDTO> put(@RequestBody OperationDTO operationDTO) {
         return ResponseEntity.ok(operationMapper.toDTO(operationService.put(operationMapper.toEntity(operationDTO))));
     }
 
+    @Operation(summary = "Operation deleting")
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable("id") Long id) {
         operationService.deleteById(id);
