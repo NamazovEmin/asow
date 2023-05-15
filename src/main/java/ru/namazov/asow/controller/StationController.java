@@ -56,7 +56,10 @@ public class StationController {
 
     @Operation(summary = "Station deleting")
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    public void delete(
+            @Parameter(description = "id of Station to be deleted")
+            @PathVariable Long id)
+    {
         Station station = stationService.findById(id);
         stationService.delete(station);
     }

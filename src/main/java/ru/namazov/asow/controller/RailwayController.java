@@ -56,7 +56,10 @@ public class RailwayController {
 
     @Operation(summary = "Railway deleting")
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    public void delete(
+            @Parameter(description = "id of Railway to be deleted")
+            @PathVariable Long id)
+    {
         Railway railway = cargoService.findById(id);
         cargoService.delete(railway);
     }

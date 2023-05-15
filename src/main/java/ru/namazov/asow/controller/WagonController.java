@@ -61,7 +61,9 @@ public class WagonController {
 
     @Operation(summary = "Wagon deleting")
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    public void delete(
+            @Parameter(description = "id of Wagon to be deleted")
+            @PathVariable Long id) {
         Wagon wagon = wagonService.findById(id);
         wagonService.delete(wagon);
     }

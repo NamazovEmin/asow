@@ -59,7 +59,9 @@ public class WagonPassportController {
 
     @Operation(summary = "WagonPassport deleting")
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    public void delete(
+            @Parameter(description = "id of WagonPassport to be deleted")
+            @PathVariable Long id) {
         WagonPassport wagonPassport = wagonPassportService.findById(id);
         wagonPassportService.delete(wagonPassport);
     }
