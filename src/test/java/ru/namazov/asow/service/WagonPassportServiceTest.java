@@ -6,20 +6,15 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.jupiter.MockitoExtension;
 
 import ru.namazov.asow.entity.WagonPassport;
 import ru.namazov.asow.enums.WagonType;
 import ru.namazov.asow.repository.WagonPassportRepository;
 
-@ExtendWith(MockitoExtension.class)
 class WagonPassportServiceTest {
 
-    @Mock
-    private WagonPassportRepository wagonPassportRepository;
+    private final WagonPassportRepository wagonPassportRepository = Mockito.mock(WagonPassportRepository.class);
     private final WagonPassportService wagonPassportService = new WagonPassportService(wagonPassportRepository);
 
     @BeforeEach

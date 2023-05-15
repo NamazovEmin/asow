@@ -7,20 +7,15 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.jupiter.MockitoExtension;
 
 import ru.namazov.asow.entity.Operation;
 import ru.namazov.asow.enums.OperationType;
 import ru.namazov.asow.repository.OperationRepository;
 
-@ExtendWith(MockitoExtension.class)
 class OperationServiceTest {
 
-    @Mock
-    private OperationRepository operationRepository;
+    private final OperationRepository operationRepository = Mockito.mock(OperationRepository.class);
     private final OperationService operationService = new OperationService(operationRepository);
 
     @BeforeEach

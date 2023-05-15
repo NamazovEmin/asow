@@ -6,19 +6,14 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.jupiter.MockitoExtension;
 
 import ru.namazov.asow.entity.Station;
 import ru.namazov.asow.repository.StationRepository;
 
-@ExtendWith(MockitoExtension.class)
 class StationServiceTest {
 
-    @Mock
-    private StationRepository stationRepository;
+    private final StationRepository stationRepository = Mockito.mock(StationRepository.class);
     private final StationService stationService = new StationService(stationRepository);
 
     @BeforeEach

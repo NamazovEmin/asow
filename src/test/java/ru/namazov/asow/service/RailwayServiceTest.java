@@ -6,20 +6,15 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.jupiter.MockitoExtension;
 
 import ru.namazov.asow.entity.Railway;
 import ru.namazov.asow.entity.Station;
 import ru.namazov.asow.repository.RailwayRepository;
 
-@ExtendWith(MockitoExtension.class)
 class RailwayServiceTest {
 
-    @Mock
-    private RailwayRepository railwayRepository;
+    private final RailwayRepository railwayRepository = Mockito.mock(RailwayRepository.class);
     private final RailwayService railwayService = new RailwayService(railwayRepository);
 
     @BeforeEach
