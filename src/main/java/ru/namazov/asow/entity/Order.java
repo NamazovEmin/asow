@@ -12,7 +12,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -22,17 +22,17 @@ import lombok.Setter;
 
 @Entity
 @NoArgsConstructor
-@Table(name = "trains")
+@Table(name = "orders")
 @Setter
 @Getter
-public class Train {
+public class Order {
 
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "train")
+    @ManyToMany(mappedBy = "order")
     private List<Wagon> wagonList = new ArrayList<>();
 
     @CreationTimestamp

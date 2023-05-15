@@ -40,9 +40,12 @@ public class Wagon {
     @Column(name = "cargo_weight")
     private Long cargosWeight;
 
-    @ManyToOne
-    @JoinColumn(name = "trains_id")
-    private Train train;
+    @ManyToMany
+    @JoinTable(
+            name = "wagon_ir_order",
+            joinColumns = @JoinColumn(name = "wagons_id"),
+            inverseJoinColumns = @JoinColumn(name = "orders_id"))
+    private List<Order> order;
 
     @ManyToOne
     @JoinColumn(name = "railways_id")

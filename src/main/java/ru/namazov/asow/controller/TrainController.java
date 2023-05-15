@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import ru.namazov.asow.dto.TrainDTO;
-import ru.namazov.asow.entity.Train;
+import ru.namazov.asow.entity.Order;
 import ru.namazov.asow.mapper.TrainMapper;
 import ru.namazov.asow.service.TrainService;
 
@@ -58,7 +58,7 @@ public class TrainController {
             @Parameter(description = "id of Train to be deleted")
             @PathVariable Long id)
     {
-        Train train = trainService.findById(id);
-        trainService.delete(train);
+        Order order = trainService.findById(id);
+        trainService.delete(order);
     }
 }

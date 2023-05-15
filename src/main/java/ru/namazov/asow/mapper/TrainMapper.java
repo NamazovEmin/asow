@@ -4,12 +4,12 @@ import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
 import ru.namazov.asow.dto.TrainDTO;
-import ru.namazov.asow.entity.Train;
+import ru.namazov.asow.entity.Order;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface TrainMapper {
 
-    Train toEntity(TrainDTO trainDTO);
+    Order toEntity(TrainDTO trainDTO);
 
-    TrainDTO toDTO(Train train);
+    TrainDTO toDTO(Order order);
 }

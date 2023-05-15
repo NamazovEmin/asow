@@ -46,15 +46,8 @@ public class WagonController {
 
     @Operation(summary = "Wagon updating")
     @PutMapping("/{id}")
-    public ResponseEntity<WagonDTO> put(@RequestBody WagonDTO wagonDTO, @PathVariable(name = "id") Long id) {
-        Wagon wagon = wagonService.findById(id);
-        wagon.setWagonPassport(wagonDTO.getWagonPassport());
-        wagon.setSerialNumber(wagonDTO.getSerialNumber());
-        wagon.setCargosList(wagonDTO.getCargosList());
-        wagon.setCargosWeight(wagonDTO.getCargosWeight());
-        wagon.setTrain(wagonDTO.getTrain());
-        wagon.setRailway(wagonDTO.getRailway());
-        return ResponseEntity.ok(wagonMapper.toDTO(wagonService.save(wagon)));
+    public ResponseEntity<WagonDTO> put(@RequestBody WagonDTO wagonDTO) {
+        return ResponseEntity.ok(wagonMapper.toDTO(wagonService.put(wagonMapper.toEntity(wagonDTO))));
     }
 
     @Operation(summary = "Getting Wagon by id")

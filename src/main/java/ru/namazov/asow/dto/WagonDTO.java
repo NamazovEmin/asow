@@ -3,8 +3,8 @@ package ru.namazov.asow.dto;
 import java.util.List;
 
 import ru.namazov.asow.entity.Cargo;
+import ru.namazov.asow.entity.Order;
 import ru.namazov.asow.entity.Railway;
-import ru.namazov.asow.entity.Train;
 import ru.namazov.asow.entity.WagonPassport;
 
 import lombok.AllArgsConstructor;
@@ -24,7 +24,7 @@ public class WagonDTO {
 
     private Long cargosWeight;
 
-    private Train train;
+    private Order order;
 
     private Railway railway;
 }
