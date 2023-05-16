@@ -13,11 +13,13 @@ public class WagonControllerDictionary {
     public static final String EXAMPLE_REQUEST_BODY_UPDATE_WAGON = WAGON_1;
     public static final String EXAMPLE_RESPONSE_UPDATE_WAGON_OK_200 = "User(id: 5, nickname: othic) has been updated successfully";
     public static final String EXAMPLE_RESPONSE_UPDATE_WAGON_PRECONDITION_FAILED_ERROR_500 = "{\"errors\":[{\"httpStatusCode\":500,\"frontendCode\":\"businessError\",\"messageToCustomer\":\"Внутренняя бизнес ошибка\",\"meta\":{\"jexceptionMsg\":\"com.example.microservices.users.error.exception.PreconditionFailedResponseStatusException{HttpStatus: 412 PRECONDITION_FAILED, Reason: Values of User.id(111) And id(222) argument Are Not Equal}\"}}]}";
-    public static final String EXAMPLE_REQUEST_BODY_CREATE_WAGON = "{\"firstName\":\"Ben\",\"lastName\":\"Mask\",\"gender\":\"MALE\",\"birthday\": \"1990-01-02\",\"currentCity\":{\"id\":5,\"name\":\"Tula\"},\"nickname\":\"benmask\"}";
     public static final String EXAMPLE_RESPONSE_CREATE_WAGON_OK_200 = "{\"id\":8,\"firstName\":\"Ben\",\"lastName\":\"Mask\",\"gender\":\"MALE\",\"birthday\":\"1990-01-02T00:00:00.000+00:00\",\"currentCity\":{\"id\": 5,\"name\":\"Tula\"},\"nickname\":\"benmask\",\"followingsNumber\":0,\"followersNumber\":0}";
     public static final String EXAMPLE_RESPONSE_CREATE_WAGON_PRECONDITION_FAILED_ERROR_500 = "{\"errors\":[{\"httpStatusCode\":500,\"frontendCode\":\"businessError\",\"messageToCustomer\":\"Внутренняя бизнес ошибка\",\"meta\":{\"jexceptionMsg\":\"com.example.microservices.users.error.exception.PreconditionFailedResponseStatusException{HttpStatus: 412 PRECONDITION_FAILED, Reason: User(nickname: usednickname) Already Exists Including Deleted}\"}}]}";
     public static final String EXAMPLE_RESPONSE_DELETE_WAGON_OK_200 = "User(id: 5, nickname: othic) has been deleted";
     public static final String EXAMPLE_RESPONSE_DELETE_WAGON_PRECONDITION_FAILED_1_ERROR_500 = "{\"errors\":[{\"httpStatusCode\":500,\"frontendCode\":\"businessError\",\"messageToCustomer\":\"Внутренняя бизнес ошибка\",\"meta\":{\"jexceptionMsg\":\"com.example.microservices.users.error.exception.PreconditionFailedResponseStatusException{HttpStatus: 412 PRECONDITION_FAILED, Reason: User(id: 9999) Does Not Exist}\"}}]}";
     public static final String EXAMPLE_RESPONSE_DELETE_WAGON_PRECONDITION_FAILED_2_ERROR_500 = "{\"errors\":[{\"httpStatusCode\":500,\"frontendCode\":\"businessError\",\"messageToCustomer\":\"Внутренняя бизнес ошибка\",\"meta\":{\"jexceptionMsg\":\"com.example.microservices.users.error.exception.PreconditionFailedResponseStatusException{HttpStatus: 412 PRECONDITION_FAILED, Reason: User(id: 111) Is Already Deleted}\"}}]}";
+
+
+    public static final String EXAMPLE_REQUEST_BODY_CREATE_WAGON_PASSPORT = "{\"firstName\":\"Ben\",\"lastName\":\"Mask\",\"gender\":\"MALE\",\"birthday\": \"1990-01-02\",\"currentCity\":{\"id\":5,\"name\":\"Tula\"},\"nickname\":\"benmask\"}";
 
 }

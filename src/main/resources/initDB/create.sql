@@ -1,32 +1,32 @@
 CREATE TABLE IF NOT EXISTS stations
 (
-    id   bigint      NOT NULL,
-    name varchar(60) NOT NULL,
-    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
-    updated_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    id          serial      NOT NULL,
+    name        varchar(60) NOT NULL,
+    create_date timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    update_date timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT stations_pkey PRIMARY KEY (id),
     CONSTRAINT stations_name_key UNIQUE (name)
 );
 
 CREATE TABLE IF NOT EXISTS railways
 (
-    id          bigint NOT NULL,
+    id          serial NOT NULL,
     num         bigint NOT NULL,
     stations_id bigint NOT NULL,
-    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
-    updated_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    create_date timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    update_date timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT railways_pkey PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS wagon_passports
 (
-    id               bigint NOT NULL,
-    serial_number    bigint NOT NULL,
-    wagon_type_id    bigint NOT NULL,
-    containerWeight  bigint NOT NULL,
-    carryingCapacity bigint NOT NULL,
-    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
-    updated_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    id                serial NOT NULL,
+    serial_number     bigint NOT NULL,
+    wagon_type_id     bigint NOT NULL,
+    container_weight  bigint NOT NULL,
+    carrying_capacity bigint NOT NULL,
+    create_date timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    update_date timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT wagon_passports_pkey PRIMARY KEY (id),
     CONSTRAINT wagon_passports_serial_number_key UNIQUE (serial_number)
 );
@@ -35,27 +35,26 @@ CREATE TABLE IF NOT EXISTS wagon_type
 (
     id   bigint       NOT NULL,
     name varchar(255) NOT NULL,
-    CONSTRAINT wagon_type_pkey PRIMARY KEY (id),
-    description text
+    CONSTRAINT wagon_type_pkey PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS cargo_in_wagon
 (
-    id        bigint NOT NULL,
-    wagons_id bigint NOT NULL,
-    cargos_id bigint NOT NULL,
-    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
-    updated_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    id          serial NOT NULL,
+    wagons_id   bigint NOT NULL,
+    cargos_id   bigint NOT NULL,
+    create_date timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    update_date timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT cargo_in_wagon_pkey PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS cargos
 (
-    id bigint NOT NULL,
-    code bigint NOT NULL,
-    name varchar(60) NOT NULL,
-    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
-    updated_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    id          serial NOT NULL,
+    code        bigint NOT NULL,
+    name        varchar(60) NOT NULL,
+    create_date timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    update_date timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT cargos_pkey PRIMARY KEY (id),
     CONSTRAINT cargos_code_key UNIQUE (code),
     CONSTRAINT cargos_name_key UNIQUE (name)
@@ -63,45 +62,45 @@ CREATE TABLE IF NOT EXISTS cargos
 
 CREATE TABLE IF NOT EXISTS wagons
 (
-    id bigint NOT NULL,
+    id                 serial NOT NULL,
     wagon_passports_id bigint NOT NULL,
-    position_number bigint,
-    cargo_weight bigint,
-    railways_id bigint,
-    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
-    updated_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    position_number    bigint,
+    cargo_weight       bigint,
+    railways_id        bigint,
+    create_date        timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    update_date        timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT wagons_pkey PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS wagon_in_order
 (
-    id        bigint NOT NULL,
-    wagons_id bigint NOT NULL,
-    orders_id bigint NOT NULL,
-    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
-    updated_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    id          serial NOT NULL,
+    wagons_id   bigint NOT NULL,
+    orders_id   bigint NOT NULL,
+    create_date timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    update_date timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT wagon_in_order_pkey PRIMARY KEY (id)
 );
 
 CREATE TABLE IF NOT EXISTS orders
 (
-    id   bigint NOT NULL,
-    code bigint NOT NULL,
-    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
-    updated_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    id          serial NOT NULL,
+    code        bigint NOT NULL,
+    create_date timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    update_date timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT order_pkey PRIMARY KEY (id),
     CONSTRAINT orders_code_key UNIQUE (code)
 );
 
 CREATE TABLE IF NOT EXISTS operations
 (
-    id   bigint NOT NULL,
+    id                serial NOT NULL,
     operation_type_id bigint NOT NULL,
-    from_railway_id bigint NOT NULL,
-    to_railway_id bigint NOT NULL,
-    wagon varchar(255) NOT NULL,
-    created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
-    updated_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    from_railway_id   bigint NOT NULL,
+    to_railway_id     bigint NOT NULL,
+    wagon             varchar(255) NOT NULL,
+    create_date       timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    update_date       timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT operations_pkey PRIMARY KEY (id)
 );
 
@@ -109,8 +108,7 @@ CREATE TABLE IF NOT EXISTS operation_type
 (
     id   bigint       NOT NULL,
     name varchar(255) NOT NULL,
-    CONSTRAINT operation_type_pkey PRIMARY KEY (id),
-    description text
+    CONSTRAINT operation_type_pkey PRIMARY KEY (id)
 );
 
 ALTER TABLE operations

@@ -13,7 +13,7 @@ public class WagonPassportDTO {
 
     private Long id;
 
-    private Long number;
+    private Long serialNumber;
 
     private WagonType wagonType;
 
