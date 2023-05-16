@@ -16,9 +16,15 @@ import ru.namazov.asow.service.WagonPassportService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
+
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+import static ru.namazov.asow.dictionary.WagonControllerDictionary.EXAMPLE_REQUEST_BODY_CREATE_WAGON;
 
 @Tag(name = "WagonPassport", description = "CRUD operations with WagonPassport")
 @RestController
@@ -32,7 +38,12 @@ public class WagonPassportController {
 
     @Operation(summary = "WagonPassport creating")
     @PostMapping
-    public ResponseEntity<WagonPassportDTO> save(@RequestBody WagonPassportDTO wagonPassportDTO) {
+    public ResponseEntity<WagonPassportDTO> save(
+            @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "User to be created",
+                    required = true, content = @Content(mediaType = APPLICATION_JSON_VALUE, schema = @Schema(implementation = WagonPassportDTO.class),
+                    examples = {@ExampleObject(value = EXAMPLE_REQUEST_BODY_CREATE_WAGON)}))
+            @RequestBody WagonPassportDTO wagonPassportDTO)
+    {
         return ResponseEntity.ok(wagonPassportMapper.toDTO(wagonPassportService.save(wagonPassportMapper.toEntity(wagonPassportDTO))));
     }
 
