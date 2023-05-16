@@ -18,13 +18,13 @@ public class WagonDTO {
 
     private WagonPassport wagonPassport;
 
-    private Long serialNumber;
+    private Long positionNumber;
 
-    private List<Cargo> cargosList;
+    private List<Cargo> cargoList;
 
-    private Long cargosWeight;
+    private Long totalCargoWeight;
 
-    private Order order;
+    private List<Order> orderList;
 
     private Railway railway;
 }
