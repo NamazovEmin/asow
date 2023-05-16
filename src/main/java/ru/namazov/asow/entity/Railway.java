@@ -24,7 +24,7 @@ public class Railway {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "number")
+    @Column(name = "num")
     private Long number;
 
     @ManyToOne

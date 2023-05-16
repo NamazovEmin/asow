@@ -7,14 +7,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import ru.namazov.asow.enums.OperationType;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -31,13 +24,14 @@ public class Operation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "type", nullable = false)
+    @Column(name = "operation_type", nullable = false)
+    @Enumerated(EnumType.ORDINAL)
     private OperationType type;
 
     @Column(name = "from_railway_id", nullable = false)
     private Long fromRailwayID;
 
-    @Column(name = "where_railway_id", nullable = false)
+    @Column(name = "to_railway_id", nullable = false)
     private Long whereRailwayID;
 
     @Column(name = "wagon_id", nullable = false)

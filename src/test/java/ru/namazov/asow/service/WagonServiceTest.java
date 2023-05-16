@@ -31,14 +31,14 @@ class WagonServiceTest {
     void save() {
         Wagon wagon = new Wagon();
         wagon.setWagonPassport(new WagonPassport());
-        wagon.setSerialNumber(1L);
+        wagon.setPositionNumber(1L);
         wagon.setCargosList(new ArrayList<>());
         wagon.setCargosWeight(200L);
         wagon.setRailway(new Railway());
 
         Wagon expectedWagon = new Wagon();
         expectedWagon.setWagonPassport(new WagonPassport());
-        expectedWagon.setSerialNumber(1L);
+        expectedWagon.setPositionNumber(1L);
         expectedWagon.setCargosList(new ArrayList<>());
         expectedWagon.setCargosWeight(200L);
         expectedWagon.setRailway(new Railway());
@@ -60,7 +60,7 @@ class WagonServiceTest {
 
         Wagon expectedWagon = new Wagon();
         expectedWagon.setWagonPassport(new WagonPassport());
-        expectedWagon.setSerialNumber(1L);
+        expectedWagon.setPositionNumber(1L);
         expectedWagon.setCargosList(new ArrayList<>());
         expectedWagon.setCargosWeight(200L);
         expectedWagon.setRailway(new Railway());

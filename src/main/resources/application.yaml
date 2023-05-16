@@ -1,16 +1,24 @@
-
+#spring:
+#  datasource:
+#    url: jdbc:h2:mem:mydb
+#    username: asow
+#    password: asow
+#    driverClassName: org.h2.Driver
+#  jpa:
+#    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+#    show-sql: true
 
 spring:
   datasource:
-    url: jdbc:h2:mem:mydb
-    username: asow
-    password: asow
-    driverClassName: org.h2.Driver
+    url: jdbc:postgresql://localhost:5432/asow
+    username: postgres
+    password: Diabolick369
+    driverClassName: org.postgresql.Driver
   jpa:
-    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+    spring.jpa.database-platform: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
 
-  springdoc.swagger-ui:
+springdoc.swagger-ui:
     enabled: true
     use-root-path: true
 

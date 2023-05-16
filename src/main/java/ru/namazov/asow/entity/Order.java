@@ -32,6 +32,10 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
+    @Column(name = "code", nullable = false, unique = true)
+    private Long code;
+
     @ManyToMany(mappedBy = "order")
     private List<Wagon> wagonList = new ArrayList<>();
 

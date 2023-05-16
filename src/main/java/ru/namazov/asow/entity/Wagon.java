@@ -27,12 +27,12 @@ public class Wagon {
     @JoinColumn(name="wagon_passports_id", nullable = false)
     private WagonPassport wagonPassport;
 
-    @Column(name = "serial_number")
-    private Long serialNumber;
+    @Column(name = "position_number")
+    private Long positionNumber;
 
     @ManyToMany
     @JoinTable(
-            name = "cargos_in_wagon",
+            name = "cargo_in_wagon",
             joinColumns = @JoinColumn(name = "wagons_id"),
             inverseJoinColumns = @JoinColumn(name = "cargos_id"))
     private List<Cargo> cargosList;
@@ -42,7 +42,7 @@ public class Wagon {
 
     @ManyToMany
     @JoinTable(
-            name = "wagon_ir_order",
+            name = "wagon_in_order",
             joinColumns = @JoinColumn(name = "wagons_id"),
             inverseJoinColumns = @JoinColumn(name = "orders_id"))
     private List<Order> order;
@@ -60,12 +60,4 @@ public class Wagon {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "update_date")
     private Date updateDate;
-
-    public Long getId() {
-        return id;
-    }
-
-    public Long getSerialNumber() {
-        return serialNumber;
-    }
 }

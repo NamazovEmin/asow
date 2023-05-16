@@ -15,6 +15,8 @@ public class OrderDTO {
 
     private Long id;
 
+    private Long code;
+
     private List<Wagon> wagonList;
 }
 

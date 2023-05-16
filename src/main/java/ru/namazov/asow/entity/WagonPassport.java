@@ -7,14 +7,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import ru.namazov.asow.enums.WagonType;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -31,10 +24,11 @@ public class WagonPassport {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "number", nullable = false, unique = true)
-    private Long number;
+    @Column(name = "serial_number", nullable = false, unique = true)
+    private Long serialNumber;
 
-    @Column(name = "type", nullable = false)
+    @Column(name = "wagon_type_id", nullable = false)
+    @Enumerated(EnumType.ORDINAL)
     private WagonType wagonType;
 
     @Column(name = "container_weight")

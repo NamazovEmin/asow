@@ -48,7 +48,7 @@ public class OperationFacadeImpl implements OperationFacade {
         comingWagonList.forEach(i -> {
             a.set(a.get() + 1L);
             i.setRailway(railwayToMove);
-            i.setSerialNumber(a.get());
+            i.setPositionNumber(a.get());
         });
         return comingWagonList;
     }
@@ -84,10 +84,10 @@ public class OperationFacadeImpl implements OperationFacade {
         comingWagonList.forEach(i -> {
             a.set(a.get() + 1L);
             i.setRailway(railwayToMove);
-            i.setSerialNumber(a.get());
+            i.setPositionNumber(a.get());
         });
         railwayToMove.getWagonList().forEach(i -> {
-            i.setSerialNumber(i.getSerialNumber() + comingWagonList.size());
+            i.setPositionNumber(i.getPositionNumber() + comingWagonList.size());
             comingWagonList.add(i);
         });
         return comingWagonList;
