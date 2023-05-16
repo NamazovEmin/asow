@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import ru.namazov.asow.entity.WagonPassport;
 import ru.namazov.asow.exception.NotFoundException;
+import ru.namazov.asow.exception.PreconditionFailed;
 import ru.namazov.asow.repository.WagonPassportRepository;
 
 import lombok.AllArgsConstructor;
@@ -15,6 +16,9 @@ public class WagonPassportService {
     private final WagonPassportRepository wagonPassportRepository;
 
     public WagonPassport save(WagonPassport wagonPassport) {
+        if (wagonPassportRepository.findBySerialNumber(wagonPassport.getSerialNumber()).isPresent()) {
+            throw new PreconditionFailed(String.format("WagonPassport serialNumber %s is busy" , wagonPassport.getSerialNumber()));
+        }
         return wagonPassportRepository.save(wagonPassport);
     }
 

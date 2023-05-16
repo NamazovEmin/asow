@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import ru.namazov.asow.exception.NotFoundException;
+import ru.namazov.asow.exception.PreconditionFailed;
 
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
@@ -19,6 +20,13 @@ public class RestExceptionHandler {
 
     private record ExceptionResponse(List<String> errors) {
     }
+
+    @ExceptionHandler(value = PreconditionFailed.class)
+    @ResponseStatus(HttpStatus.PRECONDITION_FAILED)
+    public ExceptionResponse preconditionFailed(final PreconditionFailed ex) {
+        return new ExceptionResponse(List.of(ex.getMessage()));
+    }
+
 
     @ExceptionHandler(value = IllegalArgumentException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
