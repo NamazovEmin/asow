@@ -19,46 +19,44 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import ru.namazov.asow.dto.CargoDTO;
-import ru.namazov.asow.entity.Cargo;
-import ru.namazov.asow.mapper.CargoMapper;
+import ru.namazov.asow.dto.StationDTO;
+import ru.namazov.asow.entity.Station;
+import ru.namazov.asow.mapper.StationMapper;
 import ru.namazov.asow.security.SecurityConfig;
-import ru.namazov.asow.service.CargoService;
+import ru.namazov.asow.service.StationService;
 
-@WebMvcTest(CargoController.class)
+@WebMvcTest(StationController.class)
 @TestMethodOrder(value = MethodOrderer.MethodName.class)
 @Import(SecurityConfig.class)
 @WithMockUser(roles = {"PRE_VERIFICATION_USER"})
-class CargoControllerTest {
+class RailwayControllerTest {
 
-    private @MockBean CargoMapper cargoMapper;
-    private @MockBean CargoService cargoService;
+    private @MockBean StationMapper stationMapper;
+    private @MockBean StationService stationService;
 
     private @Autowired MockMvc mockMvc;
     private @Autowired ObjectMapper mapper;
 
     @Test
     void save() throws Exception {
-        Cargo cargo = new Cargo();
-        cargo.setId(1L);
-        cargo.setCode(200L);
-        cargo.setName("sand");
+        Station station = new Station();
+        station.setId(0L);
+        station.setName("Bolshego");
 
-        Cargo cargoFromDB = new Cargo();
-        cargoFromDB.setId(1L);
-        cargoFromDB.setCode(200L);
-        cargoFromDB.setName("sand");
+        Station stationFromDB = new Station();
+        stationFromDB.setId(1L);
+        stationFromDB.setName("Bolshego");
 
-        CargoDTO cargoDTO = new CargoDTO(0L, 200L, "sand");
-        CargoDTO expectedCargoDTO = new CargoDTO(1L, 200L, "sand");
+        StationDTO stationDTO = new StationDTO(0L, "Bolshego");
+        StationDTO expectedStationDTO = new StationDTO(1L, "Bolshego");
 
-        Mockito.when(cargoMapper.toEntity(cargoDTO)).thenReturn(cargo);
-        Mockito.when(cargoService.save(cargo)).thenReturn(cargoFromDB);
+        Mockito.when(stationMapper.toEntity(stationDTO)).thenReturn(station);
+        Mockito.when(stationService.save(station)).thenReturn(stationFromDB);
         // TODO: 17.05.2023 в toDTO приходит Null
-        Mockito.when(cargoMapper.toDTO(cargoFromDB)).thenReturn(expectedCargoDTO);
+        Mockito.when(stationMapper.toDTO(stationFromDB)).thenReturn(expectedStationDTO);
 
-        String expectedJson = mapper.writeValueAsString(expectedCargoDTO);
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/cargo")
+        String expectedJson = mapper.writeValueAsString(expectedStationDTO);
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/station")
                 .contentType(MediaType.APPLICATION_JSON).content(expectedJson)).andReturn();
         MockHttpServletResponse response = mvcResult.getResponse();
         String actualJson = response.getContentAsString();
@@ -69,26 +67,24 @@ class CargoControllerTest {
 
     @Test
     void put() throws Exception {
-        Cargo cargo = new Cargo();
-        cargo.setId(1L);
-        cargo.setCode(200L);
-        cargo.setName("sand");
+        Station station = new Station();
+        station.setId(1L);
+        station.setName("Bolshego");
 
-        Cargo cargoFromDB = new Cargo();
-        cargoFromDB.setId(1L);
-        cargoFromDB.setCode(200L);
-        cargoFromDB.setName("sand");
+        Station stationFromDB = new Station();
+        stationFromDB.setId(1L);
+        stationFromDB.setName("Bolshego");
 
-        CargoDTO cargoDTO = new CargoDTO(1L, 200L, "sand");
-        CargoDTO expectedCargoDTO = new CargoDTO(1L, 200L, "sand");
+        StationDTO stationDTO = new StationDTO(1L, "Bolshego");
+        StationDTO expectedStationDTO = new StationDTO(1L, "Bolshego");
 
-        Mockito.when(cargoMapper.toEntity(cargoDTO)).thenReturn(cargo);
-        Mockito.when(cargoService.save(cargo)).thenReturn(cargoFromDB);
+        Mockito.when(stationMapper.toEntity(stationDTO)).thenReturn(station);
+        Mockito.when(stationService.save(station)).thenReturn(stationFromDB);
         // TODO: 17.05.2023 в toDTO приходит Null
-        Mockito.when(cargoMapper.toDTO(cargoFromDB)).thenReturn(expectedCargoDTO);
+        Mockito.when(stationMapper.toDTO(stationFromDB)).thenReturn(expectedStationDTO);
 
-        String expectedJson = mapper.writeValueAsString(expectedCargoDTO);
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.put("/cargo")
+        String expectedJson = mapper.writeValueAsString(expectedStationDTO);
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.put("/station")
                 .contentType(MediaType.APPLICATION_JSON).content(expectedJson)).andReturn();
         MockHttpServletResponse response = mvcResult.getResponse();
         String actualJson = response.getContentAsString();
@@ -101,17 +97,16 @@ class CargoControllerTest {
     void findById() throws Exception {
         Long id = 1L;
 
-        Cargo cargoFromDB = new Cargo();
-        cargoFromDB.setId(1L);
-        cargoFromDB.setCode(200L);
-        cargoFromDB.setName("sand");
-        CargoDTO cargoDTO = new CargoDTO(1L, 200L, "sand");
+        Station stationFromDB = new Station();
+        stationFromDB.setId(1L);
+        stationFromDB.setName("Bolshego");
+        StationDTO stationDTO = new StationDTO(1L, "Bolshego");
 
-        Mockito.when(cargoService.findById(id)).thenReturn(cargoFromDB);
-        Mockito.when(cargoMapper.toDTO(cargoFromDB)).thenReturn(cargoDTO);
+        Mockito.when(stationService.findById(id)).thenReturn(stationFromDB);
+        Mockito.when(stationMapper.toDTO(stationFromDB)).thenReturn(stationDTO);
 
-        String expectedJson = mapper.writeValueAsString(cargoDTO);
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/cargo/{id}", id)
+        String expectedJson = mapper.writeValueAsString(stationDTO);
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/station/{id}", id)
                 .contentType(MediaType.APPLICATION_JSON)).andReturn();
         MockHttpServletResponse response = mvcResult.getResponse();
         String actualJson = response.getContentAsString();
@@ -124,13 +119,13 @@ class CargoControllerTest {
     void deleteById() throws Exception {
         Long id = 1L;
 
-        Mockito.doNothing().when(cargoService).deleteById(id);
+        Mockito.doNothing().when(stationService).deleteById(id);
 
-        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.delete("/cargo/{id}", id)
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.delete("/station/{id}", id)
                 .contentType(MediaType.APPLICATION_JSON)).andReturn();
         MockHttpServletResponse response = mvcResult.getResponse();
 
         Assertions.assertEquals(HttpStatus.OK.value(), response.getStatus());
-        Mockito.verify(cargoService, Mockito.times(1)).deleteById(id);
+        Mockito.verify(stationService, Mockito.times(1)).deleteById(id);
     }
 }
