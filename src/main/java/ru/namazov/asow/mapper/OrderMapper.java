@@ -6,7 +6,7 @@ import org.mapstruct.ReportingPolicy;
 import ru.namazov.asow.dto.OrderDTO;
 import ru.namazov.asow.entity.Order;
 
-@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
+@Mapper(componentModel = "spring",uses = {WagonMapper.class}, unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface OrderMapper {
 
     Order toEntity(OrderDTO orderDTO);

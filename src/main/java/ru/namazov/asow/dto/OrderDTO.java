@@ -2,8 +2,6 @@ package ru.namazov.asow.dto;
 
 import java.util.List;
 
-import ru.namazov.asow.entity.Wagon;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,6 +15,6 @@ public class OrderDTO {
 
     private Long code;
 
-    private List<Wagon> wagonList;
+    private List<WagonDTO> wagonList;
 }
 
