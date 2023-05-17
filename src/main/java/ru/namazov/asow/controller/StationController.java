@@ -48,7 +48,7 @@ public class StationController {
     }
 
     @Operation(summary = "Station updating")
-    @PutMapping("/{id}")
+    @PutMapping
     public ResponseEntity<StationDTO> put(@RequestBody StationDTO stationDTO) {
         return ResponseEntity.ok(stationMapper.toDTO(stationService.put(stationMapper.toEntity(stationDTO))));
     }

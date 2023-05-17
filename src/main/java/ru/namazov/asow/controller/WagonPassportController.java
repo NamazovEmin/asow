@@ -59,7 +59,7 @@ public class WagonPassportController {
             @ApiResponse(responseCode = "200", description = "Updated the user",
                     content = {@Content(mediaType = APPLICATION_JSON_VALUE, schema = @Schema(implementation = String.class),
                             examples = {@ExampleObject(value = EXAMPLE_RESPONSE_UPDATE_WAGON_PASSPORT_OK_200)})})})
-            @PutMapping("/{id}")
+            @PutMapping
     public ResponseEntity<WagonPassportDTO> put(
             @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "User to be updated",
                     required = true, content = @Content(mediaType = APPLICATION_JSON_VALUE, schema = @Schema(implementation = WagonPassportDTO.class),

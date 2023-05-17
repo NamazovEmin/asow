@@ -37,7 +37,7 @@ public class RailwayController {
     }
 
     @Operation(summary = "Railway updating")
-    @PutMapping("/{id}")
+    @PutMapping
     public ResponseEntity<RailwayDTO> put(@RequestBody RailwayDTO railwayDTO) {
         return ResponseEntity.ok(railwayMapper.toDTO(railwayService.put(railwayMapper.toEntity(railwayDTO))));
     }

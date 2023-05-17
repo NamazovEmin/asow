@@ -37,7 +37,7 @@ public class CargoController {
     }
 
     @Operation(summary = "Cargo updating")
-    @PutMapping("/{id}")
+    @PutMapping
     public ResponseEntity<CargoDTO> put(@RequestBody CargoDTO cargoDTO) {
         return ResponseEntity.ok(cargoMapper.toDTO(cargoService.put(cargoMapper.toEntity(cargoDTO))));
     }

@@ -44,7 +44,7 @@ public class WagonController {
     }
 
     @Operation(summary = "Wagon updating")
-    @PutMapping("/{id}")
+    @PutMapping
     public ResponseEntity<WagonDTO> put(@RequestBody WagonDTO wagonDTO) {
         return ResponseEntity.ok(wagonMapper.toDTO(wagonService.put(wagonMapper.toEntity(wagonDTO))));
     }
