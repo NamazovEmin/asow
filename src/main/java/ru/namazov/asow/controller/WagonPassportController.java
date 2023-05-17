@@ -40,7 +40,7 @@ public class WagonPassportController {
 
     @Operation(summary = "WagonPassport creating")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Created the user",
+            @ApiResponse(responseCode = "200", description = "Created the WagonPassport",
                     content = {@Content(mediaType = APPLICATION_JSON_VALUE, schema = @Schema(implementation = WagonPassportDTO.class),
                             examples = {@ExampleObject(value = EXAMPLE_REQUEST_BODY_CREATE_WAGON_PASSPORT)})})
     })
@@ -56,12 +56,12 @@ public class WagonPassportController {
 
     @Operation(summary = "WagonPassport updating")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Updated the user",
+            @ApiResponse(responseCode = "200", description = "Updated the WagonPassport",
                     content = {@Content(mediaType = APPLICATION_JSON_VALUE, schema = @Schema(implementation = String.class),
                             examples = {@ExampleObject(value = EXAMPLE_RESPONSE_UPDATE_WAGON_PASSPORT_OK_200)})})})
             @PutMapping
     public ResponseEntity<WagonPassportDTO> put(
-            @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "User to be updated",
+            @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "WagonPassport to be updated",
                     required = true, content = @Content(mediaType = APPLICATION_JSON_VALUE, schema = @Schema(implementation = WagonPassportDTO.class),
                     examples = {@ExampleObject(value = EXAMPLE_REQUEST_BODY_UPDATE_WAGON_PASSPORT)}))
             @RequestBody WagonPassportDTO wagonPassportDTO)
