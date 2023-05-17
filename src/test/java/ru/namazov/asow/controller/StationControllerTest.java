@@ -29,7 +29,7 @@ import ru.namazov.asow.service.StationService;
 @TestMethodOrder(value = MethodOrderer.MethodName.class)
 @Import(SecurityConfig.class)
 @WithMockUser(roles = {"PRE_VERIFICATION_USER"})
-class RailwayControllerTest {
+class StationControllerTest {
 
     private @MockBean StationMapper stationMapper;
     private @MockBean StationService stationService;
