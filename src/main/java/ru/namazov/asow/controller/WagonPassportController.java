@@ -51,7 +51,7 @@ public class WagonPassportController {
             examples = {@ExampleObject(value = EXAMPLE_REQUEST_BODY_CREATE_WAGON_PASSPORT)}))
             @RequestBody WagonPassportDTO wagonPassportDTO)
     {
-        return ResponseEntity.ok(wagonPassportMapper.toDTO(wagonPassportService.save(wagonPassportMapper.toPOSTEntity(wagonPassportDTO))));
+        return ResponseEntity.ok(wagonPassportMapper.toDTO(wagonPassportService.save(wagonPassportMapper.toEntity(wagonPassportDTO))));
     }
 
     @Operation(summary = "WagonPassport updating")
@@ -66,7 +66,7 @@ public class WagonPassportController {
                     examples = {@ExampleObject(value = EXAMPLE_REQUEST_BODY_UPDATE_WAGON_PASSPORT)}))
             @RequestBody WagonPassportDTO wagonPassportDTO)
     {
-        return ResponseEntity.ok(wagonPassportMapper.toDTO(wagonPassportService.put(wagonPassportMapper.toPOSTEntity(wagonPassportDTO))));
+        return ResponseEntity.ok(wagonPassportMapper.toDTO(wagonPassportService.put(wagonPassportMapper.toEntity(wagonPassportDTO))));
     }
 
     @Operation(summary = "Getting WagonPassport by id")
