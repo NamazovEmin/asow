@@ -73,11 +73,12 @@ class WagonPassportControllerTest {
 
         Mockito.when(wagonPassportMapper.toEntity(wagonPassportDTO)).thenReturn(wagonPassport);
         Mockito.when(wagonPassportService.save(wagonPassport)).thenReturn(wagonPassportFromDB);
+        // TODO: 17.05.2023 в toDTO приходит Null
         Mockito.when(wagonPassportMapper.toDTO(wagonPassportFromDB)).thenReturn(wagonPassportDTO);
 
         String expectedJson = mapper.writeValueAsString(wagonPassportDTO);
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/wagonpassport")
-                .contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(wagonPassportDTO))).andReturn();
+                .contentType(MediaType.APPLICATION_JSON).content(expectedJson)).andReturn();
         MockHttpServletResponse response = mvcResult.getResponse();
         String actualJson = response.getContentAsString();
 
@@ -86,14 +87,74 @@ class WagonPassportControllerTest {
     }
 
     @Test
-    void put() {
+    void put() throws Exception {
+        WagonPassport wagonPassport = new WagonPassport();
+        wagonPassport.setId(1L);
+        wagonPassport.setWagonType(WagonType.BIG);
+        wagonPassport.setCarryingCapacity(200L);
+        wagonPassport.setSerialNumber(200L);
+
+        WagonPassport wagonPassportFromDB = new WagonPassport();
+        wagonPassportFromDB.setId(1L);
+        wagonPassportFromDB.setWagonType(WagonType.BIG);
+        wagonPassportFromDB.setCarryingCapacity(200L);
+        wagonPassportFromDB.setSerialNumber(200L);
+        wagonPassportFromDB.setContainerWeight(200L);
+        WagonPassportDTO wagonPassportDTO = new WagonPassportDTO(1L, 200L, WagonType.BIG,200L, 200L);
+
+        Mockito.when(wagonPassportMapper.toEntity(wagonPassportDTO)).thenReturn(wagonPassport);
+        Mockito.when(wagonPassportService.put(wagonPassport)).thenReturn(wagonPassportFromDB);
+        // TODO: 17.05.2023 в toDTO приходит Null
+
+        Mockito.when(wagonPassportMapper.toDTO(wagonPassportFromDB)).thenReturn(wagonPassportDTO);
+
+        String expectedJson = mapper.writeValueAsString(wagonPassportDTO);
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.put("/wagonpassport")
+                .contentType(MediaType.APPLICATION_JSON).content(expectedJson)).andReturn();
+        MockHttpServletResponse response = mvcResult.getResponse();
+        String actualJson = response.getContentAsString();
+
+        Assertions.assertEquals(HttpStatus.OK.value(), response.getStatus());
+        Assertions.assertEquals(expectedJson, actualJson);
     }
 
     @Test
-    void findById() {
+    void findById() throws Exception {
+        Long id = 1L;
+
+        WagonPassport wagonPassportFromDB = new WagonPassport();
+        wagonPassportFromDB.setId(1L);
+        wagonPassportFromDB.setWagonType(WagonType.BIG);
+        wagonPassportFromDB.setCarryingCapacity(200L);
+        wagonPassportFromDB.setSerialNumber(200L);
+        wagonPassportFromDB.setContainerWeight(200L);
+        WagonPassportDTO wagonPassportDTO = new WagonPassportDTO(1L, 200L, WagonType.BIG,200L, 200L);
+
+        Mockito.when(wagonPassportService.findById(id)).thenReturn(wagonPassportFromDB);
+        Mockito.when(wagonPassportMapper.toDTO(wagonPassportFromDB)).thenReturn(wagonPassportDTO);
+
+        String expectedJson = mapper.writeValueAsString(wagonPassportDTO);
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/wagonpassport/{id}", id)
+                .contentType(MediaType.APPLICATION_JSON)).andReturn();
+        MockHttpServletResponse response = mvcResult.getResponse();
+        String actualJson = response.getContentAsString();
+
+        Assertions.assertEquals(HttpStatus.OK.value(), response.getStatus());
+        Assertions.assertEquals(expectedJson, actualJson);
     }
 
     @Test
-    void deleteById() {
+    void deleteById() throws Exception {
+        Long id = 1L;
+
+        Mockito.doNothing().when(wagonPassportService).deleteById(id);
+
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.delete("/wagonpassport/{id}", id)
+                .contentType(MediaType.APPLICATION_JSON)).andReturn();
+        MockHttpServletResponse response = mvcResult.getResponse();
+
+        Assertions.assertEquals(HttpStatus.OK.value(), response.getStatus());
+        Mockito.verify(wagonPassportService, Mockito.times(1)).deleteById(id);
+
     }
 }
