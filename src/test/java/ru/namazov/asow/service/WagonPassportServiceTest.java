@@ -45,6 +45,28 @@ class WagonPassportServiceTest {
     }
 
     @Test
+    void put() {
+        WagonPassport wagonPassport = new WagonPassport();
+        wagonPassport.setWagonType(WagonType.BIG);
+        wagonPassport.setContainerWeight(200L);
+        wagonPassport.setCarryingCapacity(100L);
+        wagonPassport.setId(1L);
+
+        WagonPassport expectedWagonPassport = new WagonPassport();
+        expectedWagonPassport.setWagonType(WagonType.BIG);
+        expectedWagonPassport.setContainerWeight(2L);
+        expectedWagonPassport.setCarryingCapacity(1L);
+        expectedWagonPassport.setId(1L);
+
+        Mockito.when(wagonPassportRepository.findById(expectedWagonPassport.getId())).thenReturn(Optional.of(wagonPassport));
+        Mockito.when(wagonPassportRepository.save(expectedWagonPassport)).thenReturn(expectedWagonPassport);
+
+        WagonPassport actualWagonPassport = wagonPassportService.put(expectedWagonPassport);
+
+        Assertions.assertEquals(expectedWagonPassport, actualWagonPassport);
+    }
+
+    @Test
     void findById() {
         Long id = 1L;
 
@@ -58,5 +80,25 @@ class WagonPassportServiceTest {
         WagonPassport actualWagonPassport = wagonPassportService.findById(id);
 
         Assertions.assertEquals(expectedWagonPassport, actualWagonPassport);
+    }
+
+    @Test
+    void deleteById() {
+        Long id = 1L;
+
+        WagonPassport expectedWagonPassport = new WagonPassport();
+        expectedWagonPassport.setWagonType(WagonType.BIG);
+        expectedWagonPassport.setContainerWeight(2L);
+        expectedWagonPassport.setCarryingCapacity(1L);
+        expectedWagonPassport.setId(1L);
+
+
+        Mockito.when(wagonPassportRepository.findById(id)).thenReturn(Optional.of(expectedWagonPassport));
+        Mockito.doNothing().when(wagonPassportRepository).deleteById(id);
+
+        wagonPassportService.deleteById(id);
+
+        Mockito.verify(wagonPassportRepository, Mockito.times(1)).findById(id);
+        Mockito.verify(wagonPassportRepository, Mockito.times(1)).deleteById(id);
     }
 }

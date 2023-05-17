@@ -41,6 +41,24 @@ class StationServiceTest {
     }
 
     @Test
+    void put() {
+        Station station = new Station();
+        station.setName("Bolshego");
+        station.setId(1L);
+
+        Station expectedStation = new Station();
+        expectedStation.setName("Moskva");
+        expectedStation.setId(1L);
+
+        Mockito.when(stationRepository.findById(expectedStation.getId())).thenReturn(Optional.of(station));
+        Mockito.when(stationRepository.save(expectedStation)).thenReturn(expectedStation);
+
+        Station actualStation = stationService.put(expectedStation);
+
+        Assertions.assertEquals(expectedStation, actualStation);
+    }
+
+    @Test
     void findById() {
         Long id = 1L;
 
@@ -53,5 +71,22 @@ class StationServiceTest {
         Station actualStation = stationService.findById(id);
 
         Assertions.assertEquals(expectedStation, actualStation);
+    }
+
+    @Test
+    void deleteById() {
+        Long id = 1L;
+
+        Station expectedStation = new Station();
+        expectedStation.setName("Bolshego");
+        expectedStation.setId(1L);
+
+        Mockito.when(stationRepository.findById(id)).thenReturn(Optional.of(expectedStation));
+        Mockito.doNothing().when(stationRepository).deleteById(id);
+
+        stationService.deleteById(id);
+
+        Mockito.verify(stationRepository, Mockito.times(1)).findById(id);
+        Mockito.verify(stationRepository, Mockito.times(1)).deleteById(id);
     }
 }

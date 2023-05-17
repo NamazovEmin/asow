@@ -8,6 +8,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import ru.namazov.asow.enums.WagonType;
 
 import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,6 +18,7 @@ import lombok.Setter;
 @Table(name = "wagon_passports")
 @Setter
 @Getter
+@EqualsAndHashCode
 public class WagonPassport {
 
     @Id

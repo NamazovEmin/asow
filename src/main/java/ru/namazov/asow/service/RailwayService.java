@@ -13,10 +13,8 @@ import lombok.AllArgsConstructor;
 public class RailwayService {
 
     private final RailwayRepository railwayRepository;
-    private final StationService stationService;
 
     public Railway save(Railway railway) {
-//        railway.setStation(stationService.findById(railway.getStation().getId()));
         return railwayRepository.save(railway);
     }
 

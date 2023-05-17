@@ -8,6 +8,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import ru.namazov.asow.enums.OperationType;
 
 import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,6 +17,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Setter
 @Getter
+@EqualsAndHashCode
 @Table(name = "operations")
 public class Operation {
 
