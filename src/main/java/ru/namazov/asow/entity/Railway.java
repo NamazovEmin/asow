@@ -8,6 +8,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,6 +18,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @Table(name = "railways")
+@AllArgsConstructor
 public class Railway {
 
     @Id
@@ -27,11 +29,11 @@ public class Railway {
     @Column(name = "num")
     private Long number;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "stations_id", nullable = false)
     private Station station;
 
-    @OneToMany(mappedBy = "railway")
+    @OneToMany(mappedBy = "railway", fetch = FetchType.LAZY)
     private List<Wagon> wagonList = new ArrayList<>();
 
     @CreationTimestamp

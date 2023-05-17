@@ -23,14 +23,14 @@ public class Wagon {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne()
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="wagon_passports_id", nullable = false)
     private WagonPassport wagonPassport;
 
     @Column(name = "position_number")
     private Long positionNumber;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "cargo_in_wagon",
             joinColumns = @JoinColumn(name = "wagons_id"),
@@ -40,14 +40,14 @@ public class Wagon {
     @Column(name = "cargo_weight")
     private Long cargosWeight;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "wagon_in_order",
             joinColumns = @JoinColumn(name = "wagons_id"),
             inverseJoinColumns = @JoinColumn(name = "orders_id"))
     private List<Order> order;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "railways_id")
     private Railway railway;
 
