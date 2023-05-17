@@ -37,17 +37,12 @@ class WagonPassportControllerTest {
     private @MockBean WagonPassportMapper wagonPassportMapper;
     private @MockBean WagonPassportService wagonPassportService;
 
-//    private @Autowired WebApplicationContext context;
     private @Autowired MockMvc mockMvc;
     private @Autowired ObjectMapper mapper;
 
 
     @BeforeEach
     void setUp() {
-//        mockMvc = MockMvcBuilders
-//                .webAppContextSetup(context)
-//                .apply(springSecurity())
-//                .build();
     }
 
     @AfterEach
@@ -55,7 +50,6 @@ class WagonPassportControllerTest {
     }
 
     @Test
-//    @WithUserDetails(value="test", userDetailsServiceBeanName="localUserDetailService")
     void save() throws Exception {
         WagonPassport wagonPassport = new WagonPassport();
         wagonPassport.setId(1L);
