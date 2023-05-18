@@ -92,7 +92,6 @@ class RailwayControllerTest {
 
         Mockito.when(railwayMapper.toEntity(RailwayDTO)).thenReturn(railway);
         Mockito.when(railwayService.put(Mockito.any())).thenReturn(railwayFromDB);
-        // TODO: 17.05.2023 в toDTO приходит Null
         Mockito.when(railwayMapper.toDTO(railwayFromDB)).thenReturn(expectedRailwayDTO);
 
         String toPutJson = mapper.writeValueAsString(RailwayDTO);
