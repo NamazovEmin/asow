@@ -44,7 +44,7 @@ public class OperationFacadeImpl implements OperationFacade {
 
     private List<Wagon> moveToTail(List<Wagon> comingWagonList, Railway railwayToMove) {
         AtomicLong a = new AtomicLong();
-        a.set(railwayToMove.getWagonList().size() - 2L);
+        a.set(railwayToMove.getWagonList().size());
         comingWagonList.forEach(i -> {
             a.set(a.get() + 1L);
             i.setRailway(railwayToMove);
