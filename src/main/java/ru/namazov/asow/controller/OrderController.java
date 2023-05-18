@@ -45,7 +45,7 @@ public class OrderController {
     @Operation(summary = "Getting Order by id")
     @GetMapping("/{id}")
     public ResponseEntity<OrderDTO> findById(
-            @Parameter(description = "id of Train to be searched")
+            @Parameter(description = "id of Order to be searched")
             @PathVariable(name = "id") Long id)
     {
         return ResponseEntity.ok(orderMapper.toDTO(orderService.findById(id)));
@@ -54,7 +54,7 @@ public class OrderController {
     @Operation(summary = "Order deleting")
     @DeleteMapping("/{id}")
     public void deleteById(
-            @Parameter(description = "id of Train to be deleted")
+            @Parameter(description = "id of Order to be deleted")
             @PathVariable Long id)
     {
         orderService.deleteById(id);
