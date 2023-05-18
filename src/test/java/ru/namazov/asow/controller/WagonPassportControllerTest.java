@@ -127,10 +127,10 @@ class WagonPassportControllerTest {
         Mockito.when(wagonPassportService.findById(id)).thenReturn(wagonPassportFromDB);
         Mockito.when(wagonPassportMapper.toDTO(wagonPassportFromDB)).thenReturn(wagonPassportDTO);
 
-        String expectedJson = mapper.writeValueAsString(wagonPassportDTO);
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/wagonpassport/{id}", id)
                 .contentType(MediaType.APPLICATION_JSON)).andReturn();
         MockHttpServletResponse response = mvcResult.getResponse();
+        String expectedJson = mapper.writeValueAsString(wagonPassportDTO);
         String actualJson = response.getContentAsString();
 
         Assertions.assertEquals(HttpStatus.OK.value(), response.getStatus());

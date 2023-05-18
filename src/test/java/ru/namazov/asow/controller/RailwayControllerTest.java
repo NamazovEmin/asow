@@ -123,10 +123,10 @@ class RailwayControllerTest {
         Mockito.when(railwayService.findById(id)).thenReturn(railwayFromDB);
         Mockito.when(railwayMapper.toDTO(railwayFromDB)).thenReturn(expectedRailwayDTO);
 
-        String expectedJson = mapper.writeValueAsString(expectedRailwayDTO);
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/railway/{id}", id)
                 .contentType(MediaType.APPLICATION_JSON)).andReturn();
         MockHttpServletResponse response = mvcResult.getResponse();
+        String expectedJson = mapper.writeValueAsString(expectedRailwayDTO);
         String actualJson = response.getContentAsString();
 
         Assertions.assertEquals(HttpStatus.OK.value(), response.getStatus());

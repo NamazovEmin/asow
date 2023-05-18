@@ -110,10 +110,10 @@ class CargoControllerTest {
         Mockito.when(cargoService.findById(id)).thenReturn(cargoFromDB);
         Mockito.when(cargoMapper.toDTO(cargoFromDB)).thenReturn(cargoDTO);
 
-        String expectedJson = mapper.writeValueAsString(cargoDTO);
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/cargo/{id}", id)
                 .contentType(MediaType.APPLICATION_JSON)).andReturn();
         MockHttpServletResponse response = mvcResult.getResponse();
+        String expectedJson = mapper.writeValueAsString(cargoDTO);
         String actualJson = response.getContentAsString();
 
         Assertions.assertEquals(HttpStatus.OK.value(), response.getStatus());

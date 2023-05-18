@@ -9,6 +9,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class WagonDTO {
 
+    private Long id;
+
     private WagonPassportDTO wagonPassport;
 
     private Long positionNumber;

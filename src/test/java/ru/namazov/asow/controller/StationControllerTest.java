@@ -105,10 +105,10 @@ class StationControllerTest {
         Mockito.when(stationService.findById(id)).thenReturn(stationFromDB);
         Mockito.when(stationMapper.toDTO(stationFromDB)).thenReturn(stationDTO);
 
-        String expectedJson = mapper.writeValueAsString(stationDTO);
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/station/{id}", id)
                 .contentType(MediaType.APPLICATION_JSON)).andReturn();
         MockHttpServletResponse response = mvcResult.getResponse();
+        String expectedJson = mapper.writeValueAsString(stationDTO);
         String actualJson = response.getContentAsString();
 
         Assertions.assertEquals(HttpStatus.OK.value(), response.getStatus());
