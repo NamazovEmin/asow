@@ -40,7 +40,7 @@ class CargoControllerTest {
     @Test
     void save() throws Exception {
         Cargo cargo = new Cargo();
-        cargo.setId(1L);
+        cargo.setId(null);
         cargo.setCode(200L);
         cargo.setName("sand");
 
@@ -49,7 +49,7 @@ class CargoControllerTest {
         cargoFromDB.setCode(200L);
         cargoFromDB.setName("sand");
 
-        CargoDTO cargoDTO = new CargoDTO(0L, 200L, "sand");
+        CargoDTO cargoDTO = new CargoDTO(null, 200L, "sand");
         CargoDTO expectedCargoDTO = new CargoDTO(1L, 200L, "sand");
 
         Mockito.when(cargoMapper.toEntity(cargoDTO)).thenReturn(cargo);

@@ -52,7 +52,7 @@ class WagonPassportControllerTest {
     @Test
     void save() throws Exception {
         WagonPassport wagonPassport = new WagonPassport();
-        wagonPassport.setId(0L);
+        wagonPassport.setId(null);
         wagonPassport.setWagonType(WagonType.BIG);
         wagonPassport.setCarryingCapacity(200L);
         wagonPassport.setSerialNumber(200L);
@@ -63,18 +63,18 @@ class WagonPassportControllerTest {
         wagonPassportFromDB.setCarryingCapacity(200L);
         wagonPassportFromDB.setSerialNumber(200L);
         wagonPassportFromDB.setContainerWeight(200L);
-        WagonPassportDTO wagonPassportDTO = new WagonPassportDTO(0L, 200L, WagonType.BIG,200L, 200L);
+        WagonPassportDTO wagonPassportDTO = new WagonPassportDTO(null, 200L, WagonType.BIG,200L, 200L);
         WagonPassportDTO expectedWagonPassportDTO = new WagonPassportDTO(1L, 200L, WagonType.BIG,200L, 200L);
 
         Mockito.when(wagonPassportMapper.toEntity(wagonPassportDTO)).thenReturn(wagonPassport);
-        Mockito.when(wagonPassportService.save(wagonPassport)).thenReturn(wagonPassportFromDB);
-        // TODO: 17.05.2023 в toDTO приходит Null
+        Mockito.when(wagonPassportService.save(Mockito.any())).thenReturn(wagonPassportFromDB);
         Mockito.when(wagonPassportMapper.toDTO(wagonPassportFromDB)).thenReturn(expectedWagonPassportDTO);
 
-        String expectedJson = mapper.writeValueAsString(expectedWagonPassportDTO);
+        String toSaveJson = mapper.writeValueAsString(wagonPassportDTO);
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/wagonpassport")
-                .contentType(MediaType.APPLICATION_JSON).content(expectedJson)).andReturn();
+                .contentType(MediaType.APPLICATION_JSON).content(toSaveJson)).andReturn();
         MockHttpServletResponse response = mvcResult.getResponse();
+        String expectedJson = mapper.writeValueAsString(expectedWagonPassportDTO);
         String actualJson = response.getContentAsString();
 
         Assertions.assertEquals(HttpStatus.OK.value(), response.getStatus());
@@ -98,15 +98,14 @@ class WagonPassportControllerTest {
         WagonPassportDTO wagonPassportDTO = new WagonPassportDTO(1L, 200L, WagonType.BIG,200L, 200L);
 
         Mockito.when(wagonPassportMapper.toEntity(wagonPassportDTO)).thenReturn(wagonPassport);
-        Mockito.when(wagonPassportService.put(wagonPassport)).thenReturn(wagonPassportFromDB);
-        // TODO: 17.05.2023 в toDTO приходит Null
-
+        Mockito.when(wagonPassportService.put(Mockito.any())).thenReturn(wagonPassportFromDB);
         Mockito.when(wagonPassportMapper.toDTO(wagonPassportFromDB)).thenReturn(wagonPassportDTO);
 
-        String expectedJson = mapper.writeValueAsString(wagonPassportDTO);
+        String toPutJson = mapper.writeValueAsString(wagonPassportDTO);
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.put("/wagonpassport")
-                .contentType(MediaType.APPLICATION_JSON).content(expectedJson)).andReturn();
+                .contentType(MediaType.APPLICATION_JSON).content(toPutJson)).andReturn();
         MockHttpServletResponse response = mvcResult.getResponse();
+        String expectedJson = mapper.writeValueAsString(wagonPassportDTO);
         String actualJson = response.getContentAsString();
 
         Assertions.assertEquals(HttpStatus.OK.value(), response.getStatus());

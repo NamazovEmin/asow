@@ -44,7 +44,7 @@ class RailwayControllerTest {
         Station station = new Station();
         station.setId(1L);
         Railway railway = new Railway();
-        railway.setId(0L);
+        railway.setId(null);
         railway.setNumber(200L);
         railway.setStation(station);
 
@@ -54,7 +54,7 @@ class RailwayControllerTest {
         railwayFromDB.setStation(station);
 
         StationDTO stationDTO = new StationDTO(1L, "bolshego");
-        RailwayDTO RailwayDTO = new RailwayDTO(0L, 200L, stationDTO);
+        RailwayDTO RailwayDTO = new RailwayDTO(null, 200L, stationDTO);
         RailwayDTO expectedRailwayDTO = new RailwayDTO(1L, 200L, stationDTO);
 
         Mockito.when(railwayMapper.toEntity(RailwayDTO)).thenReturn(railway);

@@ -40,14 +40,14 @@ class StationControllerTest {
     @Test
     void save() throws Exception {
         Station station = new Station();
-        station.setId(0L);
+        station.setId(null);
         station.setName("Bolshego");
 
         Station stationFromDB = new Station();
         stationFromDB.setId(1L);
         stationFromDB.setName("Bolshego");
 
-        StationDTO stationDTO = new StationDTO(0L, "Bolshego");
+        StationDTO stationDTO = new StationDTO(null, "Bolshego");
         StationDTO expectedStationDTO = new StationDTO(1L, "Bolshego");
 
         Mockito.when(stationMapper.toEntity(stationDTO)).thenReturn(station);
