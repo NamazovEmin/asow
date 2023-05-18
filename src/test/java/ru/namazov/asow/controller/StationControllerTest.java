@@ -51,14 +51,14 @@ class StationControllerTest {
         StationDTO expectedStationDTO = new StationDTO(1L, "Bolshego");
 
         Mockito.when(stationMapper.toEntity(stationDTO)).thenReturn(station);
-        Mockito.when(stationService.save(station)).thenReturn(stationFromDB);
-        // TODO: 17.05.2023 в toDTO приходит Null
+        Mockito.when(stationService.save(Mockito.any())).thenReturn(stationFromDB);
         Mockito.when(stationMapper.toDTO(stationFromDB)).thenReturn(expectedStationDTO);
 
-        String expectedJson = mapper.writeValueAsString(expectedStationDTO);
+        String toSaveJson = mapper.writeValueAsString(stationDTO);
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/station")
-                .contentType(MediaType.APPLICATION_JSON).content(expectedJson)).andReturn();
+                .contentType(MediaType.APPLICATION_JSON).content(toSaveJson)).andReturn();
         MockHttpServletResponse response = mvcResult.getResponse();
+        String expectedJson = mapper.writeValueAsString(expectedStationDTO);
         String actualJson = response.getContentAsString();
 
         Assertions.assertEquals(HttpStatus.OK.value(), response.getStatus());
@@ -73,20 +73,20 @@ class StationControllerTest {
 
         Station stationFromDB = new Station();
         stationFromDB.setId(1L);
-        stationFromDB.setName("Bolshego");
+        stationFromDB.setName("Moscow");
 
         StationDTO stationDTO = new StationDTO(1L, "Bolshego");
-        StationDTO expectedStationDTO = new StationDTO(1L, "Bolshego");
+        StationDTO expectedStationDTO = new StationDTO(1L, "Moscow");
 
         Mockito.when(stationMapper.toEntity(stationDTO)).thenReturn(station);
-        Mockito.when(stationService.save(station)).thenReturn(stationFromDB);
-        // TODO: 17.05.2023 в toDTO приходит Null
+        Mockito.when(stationService.put(Mockito.any())).thenReturn(stationFromDB);
         Mockito.when(stationMapper.toDTO(stationFromDB)).thenReturn(expectedStationDTO);
 
-        String expectedJson = mapper.writeValueAsString(expectedStationDTO);
+        String toPutJson = mapper.writeValueAsString(stationDTO);
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.put("/station")
-                .contentType(MediaType.APPLICATION_JSON).content(expectedJson)).andReturn();
+                .contentType(MediaType.APPLICATION_JSON).content(toPutJson)).andReturn();
         MockHttpServletResponse response = mvcResult.getResponse();
+        String expectedJson = mapper.writeValueAsString(expectedStationDTO);
         String actualJson = response.getContentAsString();
 
         Assertions.assertEquals(HttpStatus.OK.value(), response.getStatus());
