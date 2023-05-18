@@ -32,7 +32,6 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @RequestMapping(value = "/operation")
 @SecurityRequirement(name = "authenticated")
-
 public class OperationController {
 
     private final OperationFacade operationFacade;

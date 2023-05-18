@@ -22,7 +22,7 @@ import lombok.AllArgsConstructor;
 
 @Tag(name = "Order", description = "CRUD operations with Order")
 @RestController
-@RequestMapping(value = "/Order")
+@RequestMapping(value = "/order")
 @AllArgsConstructor
 @SecurityRequirement(name = "authenticated")
 public class OrderController {
@@ -37,7 +37,7 @@ public class OrderController {
     }
 
     @Operation(summary = "Order updating")
-    @PutMapping("/{id}")
+    @PutMapping
     public ResponseEntity<OrderDTO> put(@RequestBody OrderDTO orderDTO) {
         return ResponseEntity.ok(orderMapper.toDTO(orderService.put(orderMapper.toEntity(orderDTO))));
     }
