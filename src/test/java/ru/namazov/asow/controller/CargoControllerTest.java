@@ -53,14 +53,14 @@ class CargoControllerTest {
         CargoDTO expectedCargoDTO = new CargoDTO(1L, 200L, "sand");
 
         Mockito.when(cargoMapper.toEntity(cargoDTO)).thenReturn(cargo);
-        Mockito.when(cargoService.save(cargo)).thenReturn(cargoFromDB);
-        // TODO: 17.05.2023 в toDTO приходит Null
+        Mockito.when(cargoService.save(Mockito.any())).thenReturn(cargoFromDB);
         Mockito.when(cargoMapper.toDTO(cargoFromDB)).thenReturn(expectedCargoDTO);
 
-        String expectedJson = mapper.writeValueAsString(expectedCargoDTO);
+        String toSaveJson = mapper.writeValueAsString(cargoDTO);
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/cargo")
-                .contentType(MediaType.APPLICATION_JSON).content(expectedJson)).andReturn();
+                .contentType(MediaType.APPLICATION_JSON).content(toSaveJson)).andReturn();
         MockHttpServletResponse response = mvcResult.getResponse();
+        String expectedJson = mapper.writeValueAsString(expectedCargoDTO);
         String actualJson = response.getContentAsString();
 
         Assertions.assertEquals(HttpStatus.OK.value(), response.getStatus());
@@ -83,14 +83,14 @@ class CargoControllerTest {
         CargoDTO expectedCargoDTO = new CargoDTO(1L, 200L, "sand");
 
         Mockito.when(cargoMapper.toEntity(cargoDTO)).thenReturn(cargo);
-        Mockito.when(cargoService.save(cargo)).thenReturn(cargoFromDB);
-        // TODO: 17.05.2023 в toDTO приходит Null
+        Mockito.when(cargoService.put(Mockito.any())).thenReturn(cargoFromDB);
         Mockito.when(cargoMapper.toDTO(cargoFromDB)).thenReturn(expectedCargoDTO);
 
-        String expectedJson = mapper.writeValueAsString(expectedCargoDTO);
+        String toSaveJson = mapper.writeValueAsString(cargoDTO);
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.put("/cargo")
-                .contentType(MediaType.APPLICATION_JSON).content(expectedJson)).andReturn();
+                .contentType(MediaType.APPLICATION_JSON).content(toSaveJson)).andReturn();
         MockHttpServletResponse response = mvcResult.getResponse();
+        String expectedJson = mapper.writeValueAsString(expectedCargoDTO);
         String actualJson = response.getContentAsString();
 
         Assertions.assertEquals(HttpStatus.OK.value(), response.getStatus());

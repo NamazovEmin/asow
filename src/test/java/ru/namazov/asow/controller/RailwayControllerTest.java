@@ -58,14 +58,15 @@ class RailwayControllerTest {
         RailwayDTO expectedRailwayDTO = new RailwayDTO(1L, 200L, stationDTO);
 
         Mockito.when(railwayMapper.toEntity(RailwayDTO)).thenReturn(railway);
-        Mockito.when(railwayService.save(railway)).thenReturn(railwayFromDB);
+        Mockito.when(railwayService.save(Mockito.any())).thenReturn(railwayFromDB);
         // TODO: 17.05.2023 в toDTO приходит Null
         Mockito.when(railwayMapper.toDTO(railwayFromDB)).thenReturn(expectedRailwayDTO);
 
-        String expectedJson = mapper.writeValueAsString(expectedRailwayDTO);
+        String toSaveJson = mapper.writeValueAsString(RailwayDTO);
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/railway")
-                .contentType(MediaType.APPLICATION_JSON).content(expectedJson)).andReturn();
+                .contentType(MediaType.APPLICATION_JSON).content(toSaveJson)).andReturn();
         MockHttpServletResponse response = mvcResult.getResponse();
+        String expectedJson = mapper.writeValueAsString(expectedRailwayDTO);
         String actualJson = response.getContentAsString();
 
         Assertions.assertEquals(HttpStatus.OK.value(), response.getStatus());
@@ -91,14 +92,15 @@ class RailwayControllerTest {
         RailwayDTO expectedRailwayDTO = new RailwayDTO(1L, 200L, stationDTO);
 
         Mockito.when(railwayMapper.toEntity(RailwayDTO)).thenReturn(railway);
-        Mockito.when(railwayService.save(railway)).thenReturn(railwayFromDB);
+        Mockito.when(railwayService.put(Mockito.any())).thenReturn(railwayFromDB);
         // TODO: 17.05.2023 в toDTO приходит Null
         Mockito.when(railwayMapper.toDTO(railwayFromDB)).thenReturn(expectedRailwayDTO);
 
-        String expectedJson = mapper.writeValueAsString(expectedRailwayDTO);
+        String toPutJson = mapper.writeValueAsString(RailwayDTO);
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.put("/railway")
-                .contentType(MediaType.APPLICATION_JSON).content(expectedJson)).andReturn();
+                .contentType(MediaType.APPLICATION_JSON).content(toPutJson)).andReturn();
         MockHttpServletResponse response = mvcResult.getResponse();
+        String expectedJson = mapper.writeValueAsString(expectedRailwayDTO);
         String actualJson = response.getContentAsString();
 
         Assertions.assertEquals(HttpStatus.OK.value(), response.getStatus());
