@@ -39,18 +39,19 @@ public class OperationController {
     private final OperationMapper operationMapper;
     private final OperationService operationService;
 
-    @PostMapping("/receive")
-    public ResponseEntity<List<OperationDTO>> receiveWagons(@RequestBody List<WagonDTO> wagonDTOList, @RequestParam Long railway) {
+    @PostMapping("/receive/{railway}")
+    public ResponseEntity<List<OperationDTO>> receiveWagons(@RequestBody List<WagonDTO> wagonDTOList,
+            @PathVariable Long railway) {
         return ResponseEntity.ok(operationMapper.toDTO(operationFacade.receive(wagonMapper.toEntity(wagonDTOList), railway)));
     }
 
-    @PostMapping("/move")
-    public ResponseEntity<List<OperationDTO>> moveWagons(@RequestBody List<WagonDTO> wagonDTOList, @RequestParam Long railway, @RequestBody Position position) {
-        return ResponseEntity.ok(operationMapper.toDTO(operationFacade.move(wagonMapper.toEntity(wagonDTOList), railway, position)));
+    @PostMapping("/move/{railway}")
+    public ResponseEntity<List<OperationDTO>> moveWagons(@RequestBody List<WagonDTO> wagonDTOList, @PathVariable Long railway, @RequestParam String position) {
+        return ResponseEntity.ok(operationMapper.toDTO(operationFacade.move(wagonMapper.toEntity(wagonDTOList), railway, Position.valueOf(position))));
     }
 
-    @PostMapping("/return")
-    public ResponseEntity<List<OperationDTO>> returnWagons(@RequestBody List<WagonDTO> wagonDTOList, @RequestParam Long railway) {
+    @PostMapping("/return/{railway}")
+    public ResponseEntity<List<OperationDTO>> returnWagons(@RequestBody List<WagonDTO> wagonDTOList, @PathVariable Long railway) {
         return ResponseEntity.ok(operationMapper.toDTO(operationFacade.bringBack(wagonMapper.toEntity(wagonDTOList), railway)));
     }
 
